@@ -52,3 +52,13 @@ export default tseslint.config({
   },
 })
 ```
+
+# Technology stack for frontend:
+
+- Vite
+- React
+- TypeScript
+- Tailwind + SCSS
+- React Hook Form
+- Zustand
+- Axios
