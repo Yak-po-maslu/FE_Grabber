@@ -1,28 +1,29 @@
 import { useState } from 'react'
 
-// Generic hook for API calls
 export function useApiRequest<T>() {
-  const [data, setData] = useState<T | null>(null) // State to store API response data
-  const [error, setError] = useState<string | null>(null) // State to store error messages
-  const [loading, setLoading] = useState<boolean>(false) // State to track loading status
+  const [data, setData] = useState<T | null>(null)
+  const [error, setError] = useState<string | null>(null)
+  const [loading, setLoading] = useState<boolean>(false)
+  const [isSuccess, setIsSuccess] = useState<boolean>(false)
 
-  // Function to execute the API call
   const execute = async (apiMethod: () => Promise<T>) => {
-    setLoading(true) // Set loading to true before the API call
+    setLoading(true)
+    setError(null)
+    setIsSuccess(false)
 
     try {
-      const response = await apiMethod() // Execute the API method
-
-      setData(response) // Set the response data
-      setError(null) // Clear any previous errors
-    } catch (error) {
-      // Handle errors and set error message
-      setError(error instanceof Error ? error.message : 'Unknown error')
-      setData(null) // Clear data on error
+      const response = await apiMethod()
+      setData(response)
+      setIsSuccess(true)
+    } catch (error: any) {
+      const message = error?.response?.data?.error || 'Щось пішло не так. Спробуйте ще раз.'
+      setError(message)
+      setData(null)
+      setIsSuccess(false)
     } finally {
-      setLoading(false) // Set loading to false after the API call
+      setLoading(false)
     }
   }
 
-  return { data, error, loading, execute } // Return state and execute function
+  return { data, error, loading, isSuccess, execute }
 }

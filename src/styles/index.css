@@ -20,7 +20,7 @@
   }
 
   .auth-register-form {
-    @apply flex w-full flex-col gap-5 md:w-1/2; /* Використано стандартні класи ширини для адаптивності */
+    @apply flex w-90 flex-col gap-5;
 
     button[type='submit'] {
       @apply mt-16;

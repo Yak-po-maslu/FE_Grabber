@@ -3,6 +3,7 @@ import {
   AddProduct,
   Admin,
   Cart,
+  ForgotPassword,
   Login,
   Main,
   Orders,
@@ -10,6 +11,7 @@ import {
   Products,
   Profile,
   Register,
+  ResetPassword,
 } from '../pages'
 import { PATHS } from '../paths'
 
@@ -42,6 +44,15 @@ export const routes = [
         path: PATHS.AUTH.register,
         element: <Register />,
       },
+      {
+        path: PATHS.PASSWORD.forgot,
+        element: <ForgotPassword />,
+      },
+      {
+        path: PATHS.PASSWORD.reset,
+        element: <ResetPassword />,
+      },
+
       {
         path: PATHS.CART,
         element: <Cart />,
