@@ -2,7 +2,6 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { forgotPassword } from '../../api/forgotPassword'
 import { useApiRequest } from '../../hooks/useApiRequest'
-import { useEffect } from 'react'
 import Button from '../Button/Button'
 import { emailSchema, EmailFormData } from '../../validation/emailSchema.ts'
 
@@ -21,16 +20,10 @@ const ForgotPasswordForm = () => {
     resolver: zodResolver(emailSchema),
   })
 
-  const { error, loading, isSuccess, execute } = useApiRequest()
-
-  useEffect(() => {
-    if (isSuccess) {
-      reset()
-    }
-  }, [isSuccess, reset])
+  const { error, loading, execute } = useApiRequest()
 
   const onSubmit: SubmitHandler<EmailFormData> = (data) => {
-    execute(() => forgotPassword({ email: data.email.toLowerCase() }))
+    execute(() => forgotPassword({ email: data.email.toLowerCase() })).then(() => reset())
   }
 
   return (

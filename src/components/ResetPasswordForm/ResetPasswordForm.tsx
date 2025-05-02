@@ -2,7 +2,6 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { resetPassword } from '../../api/resetPassword'
 import { useApiRequest } from '../../hooks/useApiRequest.ts'
-import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import Button from '../Button/Button'
 import { resetPasswordSchema, ResetPasswordFormData } from '../../validation/resetPasswordSchema'
@@ -25,13 +24,7 @@ const ResetPasswordForm = () => {
     resolver: zodResolver(resetPasswordSchema),
   })
 
-  const { error, loading, isSuccess, execute } = useApiRequest()
-
-  useEffect(() => {
-    if (isSuccess) {
-      reset()
-    }
-  }, [isSuccess, reset])
+  const { error, loading, execute } = useApiRequest()
 
   const onSubmit: SubmitHandler<ResetPasswordFormData> = (data) => {
     if (!token || !uid) {
@@ -40,7 +33,13 @@ const ResetPasswordForm = () => {
       return
     }
 
-    execute(() => resetPassword({ password: data.password, uid, token }))
+    execute(() =>
+      resetPassword({
+        password: data.password,
+        uid,
+        token,
+      }),
+    ).then(() => reset())
   }
 
   return (

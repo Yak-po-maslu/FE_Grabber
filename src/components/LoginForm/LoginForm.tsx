@@ -2,7 +2,6 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { loginSchema, LoginFormData } from '../../validation/loginSchema'
 import { useApiRequest } from '../../hooks/useApiRequest'
-import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { PATHS } from '../../paths'
 import { login } from '../../api/login'
@@ -25,13 +24,7 @@ const LoginForm: React.FC<LoginFormProps> = () => {
     resolver: zodResolver(loginSchema),
   })
 
-  const { error, loading, isSuccess, execute } = useApiRequest()
-
-  useEffect(() => {
-    if (isSuccess) {
-      reset()
-    }
-  }, [isSuccess, reset])
+  const { error, loading, execute } = useApiRequest()
 
   const onSubmit: SubmitHandler<LoginFormData> = (data) => {
     execute(() =>
@@ -39,7 +32,7 @@ const LoginForm: React.FC<LoginFormProps> = () => {
         email: data.email.toLowerCase(),
         password: data.password,
       }),
-    )
+    ).then(() => reset())
   }
 
   return (

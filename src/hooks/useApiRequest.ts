@@ -6,23 +6,28 @@ export function useApiRequest<T>() {
   const [loading, setLoading] = useState<boolean>(false)
   const [isSuccess, setIsSuccess] = useState<boolean>(false)
 
-  const execute = async (apiMethod: () => Promise<T>) => {
+  const execute = (apiMethod: () => Promise<T>) => {
     setLoading(true)
     setError(null)
     setIsSuccess(false)
 
-    try {
-      const response = await apiMethod()
-      setData(response)
-      setIsSuccess(true)
-    } catch (error: any) {
-      const message = error?.response?.data?.error || 'Щось пішло не так. Спробуйте ще раз.'
-      setError(message)
-      setData(null)
-      setIsSuccess(false)
-    } finally {
-      setLoading(false)
-    }
+    return apiMethod()
+      .then((response) => {
+        setData(response)
+        setIsSuccess(true)
+
+        return response
+      })
+      .catch((error) => {
+        const message = error?.response?.data?.error || 'Щось пішло не так. Спробуйте ще раз.'
+        setError(message)
+        setData(null)
+        setIsSuccess(false)
+        throw error
+      })
+      .finally(() => {
+        setLoading(false)
+      })
   }
 
   return { data, error, loading, isSuccess, execute }
