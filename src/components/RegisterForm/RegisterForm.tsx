@@ -1,44 +1,11 @@
 import React, { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { PATHS } from '../../paths'
 import { Link } from 'react-router-dom'
 import { useApiRequest } from '../../hooks/useApiRequest'
 import { register as registerUser } from '../../api/register'
-
-// Схема валідації форми за допомогою Zod
-const schema = z
-  .object({
-    first_name: z.string().nonempty("Ім'я є обов'язковим"), // Поле для імені, обов'язкове
-    last_name: z.string().nonempty("Прізвище є обов'язковим"), // Поле для прізвища, обов'язкове
-    phone_number: z
-      .string()
-      .nonempty("Номер телефону є обов'язковим") // Поле для номера телефону, обов'язкове
-      .regex(/^\+380\d{9}$/, 'Номер телефону має бути у форматі +380XXXXXXXXX'), // Перевірка формату номера
-    email: z
-      .string()
-      .nonempty("Електронна пошта є обов'язковою") // Поле для електронної пошти, обов'язкове
-      .email('Некоректна електронна пошта'), // Перевірка формату електронної пошти
-    password: z
-      .string()
-      .nonempty("Пароль є обов'язковим") // Поле для паролю, обов'язкове
-      .min(6, 'Пароль має містити щонайменше 6 символів'), // Мінімальна довжина паролю
-    confirmPassword: z.string().nonempty("Підтвердження паролю є обов'язковим"), // Поле для підтвердження паролю, обов'язкове
-  })
-  .superRefine((data, ctx) => {
-    // Перевірка, чи збігаються пароль і підтвердження паролю
-    if (data.confirmPassword !== data.password) {
-      ctx.addIssue({
-        code: 'custom',
-        path: ['confirmPassword'],
-        message: 'Паролі не збігаються', // Повідомлення про помилку
-      })
-    }
-  })
-
-// Тип даних форми, отриманий з схеми
-type FormData = z.infer<typeof schema>
+import { registerSchema, RegisterFormData } from '../../validation/registerSchema'
 
 const RegisterForm: React.FC = () => {
   // Використання кастомного хука для роботи з API
@@ -48,12 +15,12 @@ const RegisterForm: React.FC = () => {
     handleSubmit, // Метод для обробки відправки форми
     formState: { errors }, // Об'єкт для зберігання помилок валідації
     reset, // Метод для скидання форми
-  } = useForm<FormData>({
-    resolver: zodResolver(schema), // Підключення схеми валідації
+  } = useForm<RegisterFormData>({
+    resolver: zodResolver(registerSchema), // Підключення схеми валідації
   })
 
   // Функція для обробки відправки форми
-  const onSubmit: SubmitHandler<FormData> = (data) => {
+  const onSubmit: SubmitHandler<RegisterFormData> = (data) => {
     execute(() =>
       registerUser({
         email: data.email.toLowerCase(),

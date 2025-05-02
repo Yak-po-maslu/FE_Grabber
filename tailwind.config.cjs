@@ -9,6 +9,11 @@ module.exports = {
         primary: '#B9E2FF',
         hover: '#8ED0FF',
       },
+      fontSize: {
+        title: '32px',
+        base: '16px',
+        link: '12px',
+      },
       minWidth: {
         'btn-small': '100px',
         'btn-medium': '250px',

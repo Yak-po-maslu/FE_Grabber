@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { z } from 'zod'
+import { useForm, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { loginSchema, LoginFormData } from '../../validation/loginSchema'
 import { useApiRequest } from '../../hooks/useApiRequest'
 import { Link } from 'react-router-dom'
 import { PATHS } from '../../paths'
@@ -9,45 +8,37 @@ import { login } from '../../api/login'
 
 interface LoginFormProps {}
 
-const schema = z.object({
-  email: z.string().email('Невірний формат електронної пошти'),
-  password: z.string().min(6, 'Пароль має містити щонайменше 6 символів'),
-})
-
-type FormData = z.infer<typeof schema>
-
-const defaultValues: FormData = {
+const defaultValues: LoginFormData = {
   email: '',
   password: '',
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({}) => {
+const LoginForm: React.FC<LoginFormProps> = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<FormData>({
+  } = useForm<LoginFormData>({
     defaultValues,
-    resolver: zodResolver(schema),
+    resolver: zodResolver(loginSchema),
   })
 
   const { error, loading, execute } = useApiRequest()
 
-  // Виклик reset при успішній реєстрації
-  useEffect(() => {
-    if (!error) {
-      reset()
-    }
-  }, [error, reset])
-
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    execute(() => login({ email: data.email.toLowerCase(), password: data.password })) // Pass login function to execute
+  const onSubmit: SubmitHandler<LoginFormData> = (data) => {
+    execute(() =>
+      login({
+        email: data.email.toLowerCase(),
+        password: data.password,
+      }),
+    ).then(() => reset())
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="auth-register-form">
       <h1 className="mb-7 text-center text-3xl font-medium">Увійти</h1>
+
       <section className="auth-register-form-section">
         <input
           type="email"
@@ -57,6 +48,7 @@ const LoginForm: React.FC<LoginFormProps> = ({}) => {
           placeholder="Електронна пошта"
         />
         {errors.email && <p className="error-text">{errors.email.message}</p>}
+        {error && <p className="text-sm text-red-500">{error}</p>}
       </section>
 
       <section className="auth-register-form-section">
@@ -68,17 +60,17 @@ const LoginForm: React.FC<LoginFormProps> = ({}) => {
           placeholder="Пароль"
         />
         {errors.password && <p className="error-text">{errors.password.message}</p>}
+        {error && <p className="text-sm text-red-500">{error}</p>}
       </section>
 
       <section className="auth-register-form-section">
-        <Link to="#" className="text-xs">
+        <Link to="/forgot-password" className="text-xs">
           Забули пароль?
         </Link>
         <Link to={PATHS.AUTH.register} className="text-xs">
           Немає аккаунту? Зареєструватися
         </Link>
       </section>
-      <section className="auth-register-form-section"></section>
 
       <button type="submit" className="button" disabled={loading}>
         Увійти

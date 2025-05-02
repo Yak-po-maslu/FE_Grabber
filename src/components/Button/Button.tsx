@@ -5,11 +5,18 @@ interface BtnProps {
   onClick?: () => void
   type?: 'button' | 'submit' | 'reset'
   className?: string
+  disabled?: boolean
 }
 
-const Button: FC<BtnProps> = ({ text, onClick, type = 'button', className = '' }) => {
+const Button: FC<BtnProps> = ({
+  text,
+  onClick,
+  type = 'button',
+  className = '',
+  disabled = false,
+}) => {
   return (
-    <button onClick={onClick} className={`button ${className}`} type={type}>
+    <button onClick={onClick} type={type} className={`button ${className}`} disabled={disabled}>
       {text}
     </button>
   )
