@@ -1,22 +1,15 @@
-import { QueryClient, useQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import { EditProfileForm } from '../components'
-import useBackendRequest from '../hooks/useBackendRequest'
+import backendRequest from '../api/backendRequest'
+import { User } from '../types/types'
 
 const EditProfile = () => {
-  const queryClient = new QueryClient()
-  const fetchUserProfile = useBackendRequest()
-
   const { data } = useQuery({
     queryKey: ['profile'],
-    queryFn: () => fetchUserProfile({ path: '/api/profile/', method: 'GET' }),
-    initialData: () => queryClient.getQueryData(['profile']), // "Підглядаємо" в кеш
+    queryFn: async () => backendRequest<User>({ path: '/api/profile/', method: 'GET' }),
   })
 
-  return (
-    <div>
-      <EditProfileForm user={data} />
-    </div>
-  )
+  return <div>{data && <EditProfileForm user={data} />}</div>
 }
 
 export default EditProfile
