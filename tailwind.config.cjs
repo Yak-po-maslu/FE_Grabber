@@ -45,6 +45,8 @@ module.exports = {
           50: '#F6F6F6',
           100: '#E7E7E7',
           200: '#D1D1D1',
+          300: '#BDBDBD',
+          400: '#A6A6A6',
           500: '#6D6D6D',
           950: '#080808',
         },
@@ -59,6 +61,9 @@ module.exports = {
         'btn-medium': '250px',
         'btn-large': '350px',
         'profile-button': '15.875rem',
+      },
+      maxWidth: {
+        container: '1200px',
       },
       spacing: {
         90: '22.5rem',

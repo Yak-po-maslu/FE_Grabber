@@ -10,7 +10,7 @@ export function handleAxiosError(error: AxiosError) {
 
     // toast.error(`Error ${status}: ${message}`) // або покажи повідомлення
 
-    // ❓ Тут можна зробити ще додаткову логіку по статусу
+    //Todo: ❓ Тут можна зробити ще додаткову логіку по статусу
     if (status === 401) {
       // redirectToLogin() або показати модалку "Сесія закінчилась"
     } else if (status === 500) {
