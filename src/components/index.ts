@@ -33,3 +33,7 @@ export { default as ConfirmModal } from './ConfirmModal/ConfirmModal'
 export { default as CustomToaster } from './CustomToaster/CustomToaster'
 
 export { default as AdsImageUploader } from './AdsImageUploader/AdsImageUploader'
+
+export { default as FAQSection } from './FAQSection/FAQSection'
+
+export { default as FAQItem } from './FAQItem/FAQItem'
