@@ -14,12 +14,12 @@ module.exports = {
         h2: ['48px', { lineHeight: '140%', fontWeight: '500' }],
         h3: ['32px', { lineHeight: '130%', fontWeight: '400' }],
         h4: ['24px', { lineHeight: '130%', fontWeight: '400' }],
-        s1: ['24px', { lineHeight: '140%', fontWeight: '600' }],
+        s1: ['24px', { lineHeight: '140%', fontWeight: '500' }],
         b1: ['32px', { lineHeight: '150%', fontWeight: '400' }],
         b2: ['24px', { lineHeight: '150%', fontWeight: '400' }],
         b3: ['18px', { lineHeight: '140%', fontWeight: '400' }],
         b4: ['16px', { lineHeight: '130%', fontWeight: '400' }],
-        d1: ['14px', { lineHeight: '130%', fontWeight: '600' }],
+        d1: ['14px', { lineHeight: '130%', fontWeight: '400' }],
       },
       colors: {
         primary: {
@@ -45,7 +45,9 @@ module.exports = {
           50: '#F6F6F6',
           100: '#E7E7E7',
           200: '#D1D1D1',
+          400: '#888888',
           500: '#6D6D6D',
+          800: '#454545',
           950: '#080808',
         },
         transp: {
@@ -59,6 +61,9 @@ module.exports = {
         'btn-medium': '250px',
         'btn-large': '350px',
         'profile-button': '15.875rem',
+      },
+      maxWidth: {
+        container: '1200px',
       },
       spacing: {
         90: '22.5rem',

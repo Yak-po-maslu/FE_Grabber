@@ -1,10 +1,11 @@
 import { useForm } from 'react-hook-form'
-import { addAdsSchema } from '../features/userValidation'
+import { addAdsSchema } from '../features/adsValidation'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AdsImageUploader } from '../components'
 import { z } from 'zod'
 import useAdsCreate from '../api/adsCreate'
 import toast, { Toaster } from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 
 export type TFormData = z.infer<typeof addAdsSchema>
 
@@ -14,6 +15,10 @@ const defaultValues: TFormData = {
   category: '',
   images: [],
   price: '0',
+  contact_name: '',
+  email: '',
+  phone: '',
+  location: '',
 }
 
 const categories = {
@@ -40,13 +45,23 @@ const AddProduct = () => {
 
   const { mutateAsync: createAds } = useAdsCreate()
 
+  const navigate = useNavigate()
+
   const handleSubmitForm = async (data: TFormData) => {
     const newAds = {
       title: data.title,
       description: data.description,
       price: data.price,
       status: 'draft' as const,
-      // category: data.category,
+      category: data.category,
+      images: data.images.map((image) => {
+        if (typeof image === 'string') return image
+        return URL.createObjectURL(image)
+      }),
+      contact_name: data.contact_name,
+      email: data.email,
+      phone: data.phone,
+      location: data.location,
     }
 
     try {
@@ -58,45 +73,71 @@ const AddProduct = () => {
     }
   }
 
+  const handleCloseForm = () => {
+    reset()
+    navigate(-1)
+  }
+
   const watchCategory = watch('category')
+  const watchTitle = watch('title')
+  const watchDescription = watch('description')
+  const watchLocation = watch('location')
 
   return (
-    <div className="mx-auto max-w-7xl px-4 pt-24">
-      <h1 className="mb-24 text-h3 font-medium">Створити оголошення</h1>
-      <form onSubmit={handleSubmit(handleSubmitForm)}>
+    <div className="mx-auto max-w-container px-4 pt-24">
+      <h1 className="mb-12 text-h3 text-grey-950">Створити оголошення</h1>
+      <form
+        onSubmit={handleSubmit(handleSubmitForm)}
+        className="flex max-w-[66%] flex-col gap-12 max-[1100px]:max-w-[80%] max-[900px]:max-w-[100%]"
+      >
         {/* Секція для заголовка оголошення */}
-        <section className="mb-10">
-          <h2 className="mb-8 text-h4 font-medium">Заголовок оголошення</h2>
-          <p className="font-regular mb-5 text-b4">
-            Введіть коротку назву товару (до 100 символів)
-          </p>
-          <input
-            {...register('title')}
-            type="text"
-            placeholder="Приклад: iPhone 12, 128 Gb"
-            className={`w-full rounded-full bg-[#D9D9D9] px-5 py-2 outline-none placeholder:text-[#4D4D4D] ${errors.title ? 'outline-1 outline-error-default' : ''}`}
-          />
-          {errors.title && <p className="error-text">{errors.title.message}</p>}
+        <section>
+          <h2 className="title-add-product-section">Заголовок оголошення *</h2>
+          <p className="description-add-product-section">Введіть коротку назву товару</p>
+          <label className={`w-full ${errors.title ? 'warning-icon-for-input' : ''}`}>
+            <input
+              {...register('title')}
+              type="text"
+              maxLength={100}
+              placeholder="Приклад: Мед"
+              className={`input-add-product-section ${errors.title || watchTitle.length >= 101 ? 'outline-1 outline-error-default' : ''}`}
+            />
+          </label>
+          <div
+            className={`flex justify-between text-d1 ${errors.title ? 'text-error-default' : 'text-grey-400'}`}
+          >
+            <p>Мінімум 3 символи</p>
+            <p>{watchTitle.length}/100</p>
+          </div>
+          {(errors.title || watchTitle.length >= 101) && (
+            <p className="error-text">{errors.title?.message}</p>
+          )}
         </section>
 
         {/* Секція для опису товару */}
-        <section className="mb-10">
-          <h2 className="mb-8 text-h4 font-medium">Опис</h2>
-          <p className="font-regular mb-5 text-b4">
-            Детально опишіть товар, стан, особливості тощо
+        <section>
+          <h2 className="title-add-product-section">Опис *</h2>
+          <p className="description-add-product-section">
+            Детально опишіть товар, його особливості
           </p>
           <textarea
             {...register('description')}
-            rows={3}
-            placeholder="Приклад: Б/у, ідеальний стан, користувався обережно. Повна комплектація."
-            className={`w-full rounded-3xl bg-[#D9D9D9] px-5 py-2 outline-none placeholder:text-[#4D4D4D] ${errors.description ? 'outline-1 outline-error-default' : ''}`}
+            rows={7}
+            placeholder="Приклад: глиняна тарілка з ручним розписом, висотою 18 мм та діаметром 21 см"
+            className={`input-add-product-section ${errors.description ? 'outline-1 outline-error-default' : ''}`}
           ></textarea>
+          <div
+            className={`flex justify-between text-d1 ${errors.title ? 'text-error-default' : 'text-grey-400'}`}
+          >
+            <p>Мінімум 40 символів</p>
+            <p>{watchDescription.length}/1000</p>
+          </div>
           {errors.description && <p className="error-text">{errors.description.message}</p>}
         </section>
 
         {/* Секція для вибору категорії */}
-        <section className="mb-10">
-          <h2 className="mb-8 text-h4 font-medium">Категорія</h2>
+        <section>
+          <h2 className="title-add-product-section">Категорія *</h2>
 
           <div className="flex flex-wrap gap-5">
             {Object.entries(categories).map(([key, value]) => {
@@ -121,12 +162,40 @@ const AddProduct = () => {
               )
             })}
           </div>
+          {errors.category && <p className="error-text">{errors.category.message}</p>}
+        </section>
+
+        {/* Секція для місця створення товару */}
+        <section>
+          <h2 className="title-add-product-section">
+            Місце створення товару/місце надання сервісу *
+          </h2>
+          <p className="description-add-product-section">Введіть назву населеного пункту</p>
+          <label className={`w-full ${errors.location ? 'warning-icon-for-input' : ''}`}>
+            {' '}
+            <input
+              {...register('location')}
+              type="text"
+              maxLength={100}
+              placeholder="Приклад: Полтава"
+              className={`input-add-product-section ${errors.location || watchLocation.length >= 101 ? 'outline-1 outline-error-default' : ''}`}
+            />
+          </label>
+          <div
+            className={`flex justify-between text-d1 ${errors.title ? 'text-error-default' : 'text-grey-400'}`}
+          >
+            <p>Мінімум 3 символи</p>
+            <p>{watchLocation.length}/100</p>
+          </div>
+          {(errors.location || watchLocation.length >= 101) && (
+            <p className="error-text">{errors.location?.message}</p>
+          )}
         </section>
 
         {/* Секція для завантаження зображень */}
-        <section className="mb-10">
-          <h2 className="mb-8 text-h4 font-medium">Додайте зображення</h2>
-          <p className="font-regular mb-5 text-b4">
+        <section>
+          <h2 className="title-add-product-section">Зображення *</h2>
+          <p className="description-add-product-section">
             Перетягніть файли або натисніть для завантаження
           </p>
 
@@ -134,24 +203,79 @@ const AddProduct = () => {
         </section>
 
         {/* Секція для введення ціни */}
-        <section className="mb-10">
-          <h2 className="mb-8 text-h4 font-medium">Ціна</h2>
-          <p className="font-regular mb-5 text-b4">Введіть ціну без ком/крапок</p>
-          <input
-            type="number"
-            {...register('price')}
-            placeholder="Наприклад: 12000"
-            className={`w-full rounded-3xl bg-[#D9D9D9] px-5 py-2 outline-none placeholder:text-[#4D4D4D] ${
-              errors.price ? 'outline-1 outline-error-default' : ''
-            }`}
-          />
+        <section>
+          <h2 className="title-add-product-section">Ціна (грн) *</h2>
+          <p className="description-add-product-section">
+            Введіть цифру без крапок, ком та відступів
+          </p>
+          <label className={`w-full ${errors.price ? 'warning-icon-for-input' : ''}`}>
+            <input
+              type="number"
+              {...register('price')}
+              placeholder="Приклад: 22450"
+              className={`input-add-product-section ${
+                errors.price ? 'outline-1 outline-error-default' : ''
+              }`}
+            />
+          </label>
           {errors.price && <p className="error-text">{errors.price.message}</p>}
         </section>
 
-        <button type="submit" className="button px-16 py-2">
-          Опублікувати
-        </button>
+        {/* Секція для введення контактних даних */}
+        <section>
+          <h2 className="title-add-product-section">Контактні данні *</h2>
+          {/* Ім'я */}
+          <p className="description-add-product-section">Ім’я особи, яка продає товар</p>
+          <label className={`w-full ${errors.contact_name ? 'warning-icon-for-input' : ''}`}>
+            <input
+              {...register('contact_name')}
+              type="text"
+              maxLength={100}
+              placeholder="Вікторія"
+              className={`input-add-product-section w-1/2 ${errors.contact_name ? 'outline-1 outline-error-default' : ''}`}
+            />
+          </label>
+          {errors.contact_name && <p className="error-text">{errors.contact_name?.message}</p>}
+
+          {/* Email */}
+          <p className="description-add-product-section">Пошта</p>
+          <label className={`w-full ${errors.email ? 'warning-icon-for-input' : ''}`}>
+            <input
+              {...register('email')}
+              type="email"
+              placeholder="e-mail"
+              className={`input-add-product-section w-1/2 ${errors.email ? 'outline-1 outline-error-default' : ''}`}
+            />
+          </label>
+          {errors.email && <p className="error-text">{errors.email?.message}</p>}
+
+          {/* Телефон */}
+          <p className="description-add-product-section">Телефон</p>
+          <label className={`w-full ${errors.phone ? 'warning-icon-for-input' : ''}`}>
+            <input
+              {...register('phone')}
+              type="text"
+              placeholder="+380..."
+              className={`input-add-product-section w-1/2 ${errors.phone ? 'outline-1 outline-error-default' : ''}`}
+            />
+          </label>
+          {errors.phone && <p className="error-text">{errors.phone?.message}</p>}
+        </section>
+
+        <div className="flex justify-end gap-5">
+          <button
+            type="button"
+            className="text-d1 text-grey-500 underline"
+            onClick={handleCloseForm}
+          >
+            Скасувати
+          </button>
+          <button type="submit" className="button px-16 py-2">
+            Опублікувати
+          </button>
+        </div>
       </form>
+
       <Toaster
         position="bottom-center"
         toastOptions={{

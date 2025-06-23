@@ -103,36 +103,3 @@ export const editProfileSchema = baseUserSchema.extend({
     .nonempty('Введіть локацію')
     .regex(/^[^\d!@#$%^&*()_+=<>?/\\]+$/, 'Локація не має містити цифр чи спецсимволів'),
 })
-
-export const addAdsSchema = z.object({
-  title: z
-    .string()
-    .nonempty('Заголовок є обовʼязковим')
-    .max(100, 'Заголовок має містити не більше 100 символів')
-    .min(2, 'Заголовок має містити не менше 2 символів'),
-  description: z
-    .string()
-    .nonempty('Опис є обовʼязковим')
-    .max(1000, 'Опис має містити не більше 1000 символів')
-    .min(2, 'Опис має містити не менше 2 символів'),
-  category: z.string(),
-  images: z
-    .array(
-      z
-        .union([z.string().url(), z.instanceof(File)])
-        .refine(
-          (file) => !file || typeof file === 'string' || file.size < 5_000_000,
-          'Файл має бути менше 5MB',
-        )
-        .refine(
-          (file) =>
-            !file || typeof file === 'string' || ['image/jpeg', 'image/png'].includes(file.type),
-          'Тільки JPEG/PNG',
-        ),
-    )
-    .max(5, 'Максимум 5 зображень'),
-  price: z
-    .string()
-    .nonempty('Ціна є обовʼязковою')
-    .refine((val) => !isNaN(Number(val)) && Number(val) >= 1, 'Ціна має бути числом більше за 0'),
-})
