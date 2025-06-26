@@ -5,7 +5,6 @@ import {
   Cart,
   ForgotPassword,
   Login,
-  Main,
   Orders,
   ProductDetails,
   Products,
@@ -13,6 +12,7 @@ import {
   Register,
   ResetPassword,
   EditProfile,
+  HomePage,
 } from '../pages'
 import { PATHS } from '../paths'
 import ChangeUserPassword from '../pages/ChangeUserPassword'
@@ -24,7 +24,7 @@ export const routes = [
     children: [
       {
         index: true,
-        element: <Main />,
+        element: <HomePage />,
       },
       {
         path: PATHS.PRODUCTS.list,

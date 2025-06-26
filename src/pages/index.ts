@@ -23,3 +23,5 @@ export { default as Profile } from './Profile'
 export { default as Admin } from './Admin'
 
 export { default as EditProfile } from './EditProfile'
+
+export { default as HomePage } from './HomePage'

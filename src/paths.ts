@@ -30,6 +30,7 @@ export const API_ENDPOINTS = {
     addImage: 'ads/{ad_id}/add-image/',
     approve: 'ads/{ad_id}/approve/',
     reject: 'ads/{ad_id}/reject/',
+    recommendations: '/ads/recommendations/',
   },
   AUTH: {
     login: 'user/login/',
