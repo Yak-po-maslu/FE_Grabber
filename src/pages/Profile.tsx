@@ -1,5 +1,5 @@
 import defaultProfileAvatar from '../assets/images/defaultProfileAvatar.svg'
-import editIcon from '../assets/images/editIcon.png'
+import EditIcon from '../assets/images/editIcon.svg?react'
 import { formatDate } from '../features/formatDate'
 import { Link } from 'react-router-dom'
 import { PATHS } from '../paths'
@@ -39,7 +39,7 @@ const Profile = () => {
                 <div className="flex items-center gap-[6.06rem] py-[1.15rem] pl-[0.625rem]">
                   <p className="text-b2 font-medium">Персональна інформація</p>
                   <Link to={PATHS.PROFILE.edit}>
-                    <img src={editIcon} alt="" />
+                    <EditIcon className="text-grey-50" />
                   </Link>
                 </div>
                 <div className="text-b4">

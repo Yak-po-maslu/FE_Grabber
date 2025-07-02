@@ -7,6 +7,7 @@ import { PATHS } from '../../paths'
 import useLogin from '../../api/login'
 import { LoginSchema } from '../../features/userValidation'
 import userProfileStore from '../../store/userProfileStore'
+import Button from '../Button/Button'
 
 interface LoginFormProps {}
 
@@ -93,10 +94,8 @@ const LoginForm: React.FC<LoginFormProps> = ({}) => {
           Немає аккаунту? Зареєструватися
         </Link>
       </section>
-
-      <button type="submit" className="button" disabled={status === 'pending'}>
-        Увійти
-      </button>
+      {/* Кнопка для відправки форми */}
+      <Button disabled={status === 'pending'} type="submit" text="Увійти" />
     </form>
   )
 }

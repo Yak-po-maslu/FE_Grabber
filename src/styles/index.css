@@ -23,10 +23,12 @@
     }
   }
 
+  /* Стилі для іконки "!" в інпутах */
   .warning-icon-for-input {
-    @apply relative after:absolute after:right-10 after:top-1/2 after:block after:h-5 after:w-5 after:translate-y-[-50%] after:bg-warning-icon after:bg-contain after:bg-center after:bg-no-repeat after:content-[""];
+    @apply relative after:absolute after:right-4 after:top-1/2 after:block after:h-5 after:w-5 after:translate-y-[-50%] after:bg-warning-icon after:bg-contain after:bg-center after:bg-no-repeat after:content-[""];
   }
 
+  /* Стилі для форми реєстрації користувача */
   .auth-register-form {
     @apply flex w-full flex-col gap-5 md:w-1/2;
 
@@ -35,19 +37,23 @@
     }
   }
 
+  /* Стилі для секції форми реєстрації користувача */
   .auth-register-form-section {
     @apply relative flex flex-col items-center gap-2;
   }
+  /* Стилі для тексту, який з'являється під час виникнення помилки */
   .error-text {
-    @apply text-sm text-error-default;
+    @apply text-d1 text-error-default;
   }
 
+  /* Стилі для кнопки */
   .button {
-    @apply rounded-3xl bg-primary-900 px-2 py-3 text-primary-30 transition duration-300 hover:cursor-pointer hover:bg-secondary-blue-700 hover:text-primary-30;
+    @apply rounded-[40px] bg-primary-900 px-8 py-4 text-primary-30 transition duration-300;
+  }
 
-    &:hover {
-      box-shadow: inset rgba(0, 0, 0, 0.5) 0px 0px 6px 0px;
-    }
+  /* Стилі для кнопки з ефектом наведення */
+  .button-hover {
+    @apply hover:cursor-pointer hover:bg-secondary-blue-700 hover:text-primary-30;
   }
 
   .close-button {
@@ -67,5 +73,37 @@
   }
   .custom-button {
     @apply !my-[6.75rem] bg-[#2D336B] !px-[3.687rem] !py-[0.625rem] text-[#F8F8F8] active:scale-95 disabled:transform-none disabled:border-gray-300 disabled:bg-gray-300 disabled:active:scale-100;
+  }
+  /* Стилі для заголовку секції на сторінці додавання товару */
+  .title-add-product-section {
+    @apply mb-6 text-s1 text-grey-950;
+  }
+  /* Стилі для опису секції на сторінці додавання товару */
+  .description-add-product-section {
+    @apply mb-2 text-b3 text-grey-800;
+  }
+  /* Стилі для інпутів на сторінці додавання товару */
+  .input-add-product-section {
+    @apply mb-2 w-full rounded-[20px] bg-transparent px-4 py-2 text-grey-950 outline outline-1 outline-grey-500 placeholder:text-grey-400 focus:outline-2;
+  }
+
+  .button1 {
+    display: grid;
+    grid-template-areas: 'stack';
+  }
+  .button1 .spinner {
+    grid-area: stack;
+  }
+  .button1 .text {
+    grid-area: stack;
+  }
+
+  .button1.loading .spinner {
+    display: block;
+  }
+
+  .button1.loading .text {
+    opacity: 0;
+    visibility: hidden;
   }
 }

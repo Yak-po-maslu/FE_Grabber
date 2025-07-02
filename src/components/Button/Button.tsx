@@ -7,6 +7,7 @@ interface BtnProps {
   children?: React.ReactNode
   className?: string
   disabled?: boolean
+  isHover?: boolean
 }
 
 const Button: FC<BtnProps> = ({
@@ -16,12 +17,13 @@ const Button: FC<BtnProps> = ({
   children,
   className = '',
   disabled = false,
+  isHover = true,
 }) => {
   return (
     <button
       onClick={onClick}
       type={type}
-      className={`rounded-3xl px-4 py-2 transition duration-300 hover:cursor-pointer ${className}`}
+      className={`button ${isHover ? 'button-hover' : ''} ${className}`}
       disabled={disabled}
     >
       {children || text}

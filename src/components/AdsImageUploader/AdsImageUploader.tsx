@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { UseFormSetValue, UseFormWatch } from 'react-hook-form'
 import { TFormData } from '../../pages/AddProduct'
-import imgPlaceholder from '../../assets/icons/photo-icon.svg'
+import IconPlaseholder from '../../assets/icons/photo-icon.svg?react'
 
 // Описуємо пропси для компонента
 interface AdsImageUploaderProps {
@@ -56,13 +56,17 @@ const AdsImageUploader: React.FC<AdsImageUploaderProps> = ({ setValue, watch }) 
     <div className="rounded-lg border border-dashed p-4 text-center">
       {/* Прев'ю зображень (максимум 5) */}
       <div className="mb-4 flex flex-wrap justify-start gap-2">
-        {[...Array(5)].map((_, index) => {
+        {[...Array(4)].map((_, index) => {
           const image = images[index]
 
           return (
             <div
               key={index}
-              className="relative flex h-28 w-40 items-center justify-center overflow-hidden rounded-lg border bg-slate-300"
+              className="group relative flex aspect-[183/127] w-[24%] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-transparent transition-colors duration-300 hover:bg-grey-200"
+              onClick={(e) => {
+                e.stopPropagation()
+                handleClick()
+              }}
             >
               {image ? (
                 <>
@@ -75,7 +79,10 @@ const AdsImageUploader: React.FC<AdsImageUploaderProps> = ({ setValue, watch }) 
                   {/* Кнопка видалення зображення */}
                   <button
                     type="button"
-                    onClick={() => handleRemoveImage(index)}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      handleRemoveImage(index)
+                    }}
                     className="absolute right-1 top-1 rounded-full bg-red-600 px-2 text-white"
                   >
                     ×
@@ -86,13 +93,13 @@ const AdsImageUploader: React.FC<AdsImageUploaderProps> = ({ setValue, watch }) 
                 <div
                   onDrop={handleDrop}
                   onDragOver={(e) => e.preventDefault()}
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    handleClick()
-                  }}
-                  className="cursor-pointer rounded-lg border border-dashed p-4 text-center"
+                  className="rounded-lg p-4 text-center"
                 >
-                  <img src={imgPlaceholder} alt="img" />
+                  <span className="hidden text-d1 text-grey-500 underline active:text-primary-900 group-hover:inline">
+                    Додати зображення
+                  </span>
+                  {/* Іконка для плейсхолдера */}
+                  <IconPlaseholder className="mx-auto text-[40px] text-grey-400 group-hover:hidden" />
                 </div>
               )}
             </div>

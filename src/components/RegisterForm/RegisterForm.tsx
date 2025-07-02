@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { registerSchema } from '../../features/userValidation'
 import useRegister from '../../api/register'
 import userProfileStore from '../../store/userProfileStore'
+import Button from '../Button/Button'
 
 // Тип даних форми, отриманий з схеми
 type FormData = z.infer<typeof registerSchema>
@@ -147,10 +148,10 @@ const RegisterForm: React.FC = () => {
           <li className="ml-2 pl-2">хоча б одну цифру</li>
         </ul>
       </section>
+
       {/* Кнопка для відправки форми */}
-      <button type="submit" className="button" disabled={status === 'pending'}>
-        Зареєструватися
-      </button>
+      <Button type="submit" disabled={status === 'pending'} text="Зареєструватися" />
+
       {/* Посилання для переходу на сторінку входу */}
       <section className="auth-register-form-section">
         <Link to={PATHS.AUTH.login} className="text-xs">

@@ -24,25 +24,27 @@ const Menu = () => {
 
       {isOpen && (
         <div
-          className="absolute right-0 z-50 mt-2 w-48 rounded-lg border bg-white text-black shadow-xl"
+          className="absolute right-0 z-50 mt-2 w-48 overflow-hidden rounded-lg border bg-white text-black shadow-xl"
           onClick={(e) => e.stopPropagation()}
         >
-          <Button
-            text="Профіль"
+          <button
             onClick={() => {
               setIsOpen(false)
               navigate(PATHS.PROFILE.profile)
             }}
-            className="w-full px-4 py-2 text-left hover:bg-gray-100"
-          />
-          <Button
-            text="Вихід"
+            className="w-full px-4 py-2 text-left transition-colors duration-300 hover:bg-grey-200"
+          >
+            Профіль
+          </button>
+          <button
             onClick={() => {
               setIsOpen(false)
               setShowModal(true)
             }}
-            className="w-full px-4 py-2 text-left hover:bg-gray-100"
-          />
+            className="w-full px-4 py-2 text-left transition-colors duration-300 hover:bg-grey-200"
+          >
+            Вихід
+          </button>
         </div>
       )}
 
