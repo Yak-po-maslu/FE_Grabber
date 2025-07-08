@@ -4,18 +4,9 @@ import ReactDOM from 'react-dom'
 type ModalProps = {
   onClose: () => void
   children: ReactNode
-  className?: string
-  contentClassName?: string
-  disablePortal?: boolean
 }
 
-const Modal: React.FC<ModalProps> = ({
-  onClose,
-  children,
-  className = '',
-  contentClassName = '',
-  disablePortal = false,
-}) => {
+const Modal: React.FC<ModalProps> = ({ onClose, children }) => {
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
@@ -30,24 +21,21 @@ const Modal: React.FC<ModalProps> = ({
     }
   }, [onClose])
 
-  const modalContent = (
+  return ReactDOM.createPortal(
     <div
-      className={`fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/50 ${className}`}
+      className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/50"
       onClick={onClose}
     >
       <div
-        className={`relative overflow-y-auto rounded-xl bg-white p-6 ${contentClassName}`}
+        className="relative overflow-y-auto rounded-xl bg-white p-6"
         onClick={(e) => e.stopPropagation()}
       >
         <button className="close-button" onClick={onClose}></button>
         {children}
       </div>
-    </div>
+    </div>,
+    document.getElementById('modal-root') as HTMLElement,
   )
-
-  return disablePortal
-    ? modalContent
-    : ReactDOM.createPortal(modalContent, document.getElementById('modal-root') as HTMLElement)
 }
 
 export default Modal

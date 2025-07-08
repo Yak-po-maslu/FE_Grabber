@@ -15,7 +15,7 @@ const NewsCard = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     reset,
   } = useForm<FormData>({
     resolver: zodResolver(subscribeSchema),
@@ -36,44 +36,41 @@ const NewsCard = () => {
   }
 
   return (
-    <div className="relative min-h-[384px]">
+    <div className="relative min-h-[384px] bg-bg-news bg-cover bg-center bg-no-repeat">
       {isSuccessModalOpen && (
-        <div className="absolute left-0 right-0 top-0 z-20 flex justify-center">
-          <div className="w-full max-w-[1200px] py-[25px]">
-            <SuccessModal
-              onClose={() => setIsSuccessModalOpen(false)}
-              disablePortal
-              modalClassName="!static !inset-0 !bg-transparent left-0 right-0 top-[50px] bottom-[50px] "
-            />
+        <div className="absolute inset-0 z-20 flex items-center justify-center px-2 py-10">
+          <div className="w-full max-w-[1200px]">
+            <SuccessModal onClose={() => setIsSuccessModalOpen(false)} />
           </div>
         </div>
       )}
 
-      <div className="relative bg-bg-news bg-cover bg-center bg-no-repeat">
-        <div className="absolute inset-0 bg-black/40" />
-        <div className="relative z-10 mx-auto max-w-[1200px] px-4">
-          <h2 className="py-20 text-center text-h3 text-primary-30">Будь у курсі новинок</h2>
-          <form className="flex gap-6 pb-24" onSubmit={handleSubmit(onSubmit)}>
-            <Input
-              name="first_name"
-              placeholder="Ім'я"
-              register={register}
-              error={errors.first_name}
-            />
-            <Input
-              name="email"
-              placeholder="E-mail"
-              type="email"
-              register={register}
-              error={errors.email}
-            />
+      <div className="absolute inset-0 bg-black/40" />
+      <div className="relative z-10 mx-auto max-w-[1200px] px-4">
+        <h2 className="py-20 text-center text-h3 text-primary-30">Будь у курсі новинок</h2>
+        <form className="flex gap-6 pb-24" onSubmit={handleSubmit(onSubmit)}>
+          <Input
+            name="first_name"
+            placeholder="Ім'я"
+            register={register}
+            error={errors.first_name}
+          />
+          <Input
+            name="email"
+            placeholder="E-mail"
+            type="email"
+            register={register}
+            error={errors.email}
+          />
+          <div>
             <Button
               type="submit"
               text="Підписатися"
-              className="rounded-[30px] bg-primary-30 text-grey-950"
+              className="button-second"
+              disabled={isSubmitting}
             />
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     </div>
   )
