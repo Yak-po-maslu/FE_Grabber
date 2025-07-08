@@ -51,6 +51,7 @@ export const API_ENDPOINTS = {
     deleteUser: 'user/delete/',
     deleteUserPhoto: 'user/delete-image-profile/',
   },
+  SUBSCRIBE: '/subscribe/',
   ORDERS: {
     list: 'orders/',
   },

@@ -18,10 +18,7 @@ export const baseUserSchema = z.object({
     .string()
     .nonempty("Номер телефону є обов'язковим")
     .regex(/^\+380\d{9}$/, 'Номер телефону має бути у форматі +380XXXXXXXXX'),
-  email: z
-    .string()
-    .nonempty("Електронна пошта є обов'язковою")
-    .email('Некоректна електронна пошта'),
+  email: z.string().nonempty("Електронна пошта є обов'язковою").email('Некоректний e-mail'),
 })
 
 const passwordValidation = z
@@ -135,4 +132,9 @@ export const addAdsSchema = z.object({
     .string()
     .nonempty('Ціна є обовʼязковою')
     .refine((val) => !isNaN(Number(val)) && Number(val) >= 1, 'Ціна має бути числом більше за 0'),
+})
+
+export const subscribeSchema = baseUserSchema.pick({
+  first_name: true,
+  email: true,
 })

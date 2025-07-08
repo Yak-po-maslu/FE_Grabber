@@ -71,6 +71,7 @@ module.exports = {
       },
       backgroundImage: {
         'warning-icon': "url('./src/assets/icons/exclamation-icon.svg')",
+        'bg-news': "url('/src/assets/images/BG.jpg')",
       },
     },
   },

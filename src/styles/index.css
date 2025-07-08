@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 @font-face {
   font-family: 'KyivTypeTitling';
   src: url('../assets/fonts/KyivTypeTitling-Bold.woff2') format('woff2');
@@ -43,6 +44,7 @@
   .auth-register-form-section {
     @apply relative flex flex-col items-center gap-2;
   }
+
   .error-text {
     @apply text-sm text-error-default;
   }
@@ -55,6 +57,15 @@
     }
   }
 
+  .button-second {
+    @apply rounded-[30px] px-8 py-2 bg-primary-30 text-grey-950  transition duration-300 border border-transparent
+    hover:bg-grey-100
+    focus:outline-none
+    focus:shadow-[0_0_0_2px_theme('colors.grey.100')]
+    active:bg-grey-200
+    disabled:bg-grey-100 disabled:cursor-not-allowed disabled:text-grey-500
+  }
+
   .close-button {
     @apply absolute right-6 top-4 flex flex-col transition-transform duration-300 ease-in-out;
 
@@ -63,13 +74,16 @@
       @apply absolute h-0.5 w-4 bg-grey-950;
       content: '';
     }
+
     &::after {
       @apply rotate-45;
     }
+
     &::before {
       @apply -rotate-45;
     }
   }
+
   .custom-button {
     @apply !my-[6.75rem] bg-[#2D336B] !px-[3.687rem] !py-[0.625rem] text-[#F8F8F8] active:scale-95 disabled:transform-none disabled:border-gray-300 disabled:bg-gray-300 disabled:active:scale-100;
   }
