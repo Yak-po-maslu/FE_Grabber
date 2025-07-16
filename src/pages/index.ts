@@ -2,7 +2,7 @@ export { default as Main } from './Main'
 
 export { default as Products } from './Products'
 
-export { default as ProductDetails } from './ProductDetails'
+export { default as AdDetails } from './AdDetails.tsx'
 
 export { default as AddProduct } from './AddProduct'
 

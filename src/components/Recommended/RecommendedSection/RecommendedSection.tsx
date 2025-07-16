@@ -9,7 +9,13 @@ import useFetchRecommended from '../../../api/useFetchRecommended.ts'
 import 'swiper/css'
 import 'swiper/css/navigation'
 
-const RecommendedSection = () => {
+type RecommendedSectionProps = {
+  text?: string
+  slideView?: number
+  variant?: 'home' | 'adPage'
+}
+
+const RecommendedSection = ({ slideView, text, variant = 'home' }: RecommendedSectionProps) => {
   const [isBeginning, setIsBeginning] = useState(true)
   const [isEnd, setIsEnd] = useState(false)
 
@@ -24,14 +30,22 @@ const RecommendedSection = () => {
   if (isError) return <p>Сталася помилка при завантаженні</p>
 
   return (
-    <section className="relative mx-auto mb-[100px] h-[565px] max-w-[1200px]">
-      <h2 className="pb-8 text-center text-h3">Вам може сподобатися</h2>
+    <section className="relative mx-auto mb-[100px] max-w-[1200px]">
+      <h2 className="pb-8 text-center text-h3">{text}</h2>
 
-      <div className="relative">
+      <div className={variant === 'home' ? 'relative h-[491px]' : 'relative h-[513px]'}>
+        <button
+          className={`swiper-button-prev group absolute left-[-40px] top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full text-grey-50 transition-colors hover:text-grey-100 active:text-grey-200 ${
+            isBeginning ? 'pointer-events-none opacity-0' : ''
+          }`}
+        >
+          <ArrowLeftIcon className="h-5 w-5 [&_.arrow-path]:fill-gray-200 group-hover:[&_.arrow-path]:fill-gray-400 group-active:[&_.arrow-path]:fill-gray-400" />
+        </button>
+
         <Swiper
           modules={[Navigation]}
           spaceBetween={20}
-          slidesPerView={2}
+          slidesPerView={slideView}
           slidesPerGroup={1}
           onSwiper={handleSwiper}
           onSlideChange={handleSwiper}
@@ -44,24 +58,19 @@ const RecommendedSection = () => {
               slidesPerView: 1,
             },
             768: {
-              slidesPerView: 2,
+              slidesPerView: slideView,
             },
           }}
         >
           {recommendedAds?.map((ad) => (
-            <SwiperSlide key={ad.id}>
-              <RecommendedCard ad={ad} />
+            <SwiperSlide key={ad.id} className="h-full">
+              <RecommendedCard
+                ad={ad}
+                cardClassName={variant === 'home' ? 'homeCard' : 'adPageCard'}
+              />
             </SwiperSlide>
           ))}
         </Swiper>
-
-        <button
-          className={`swiper-button-prev group absolute left-[-40px] top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full text-grey-50 transition-colors hover:text-grey-100 active:text-grey-200 ${
-            isBeginning ? 'pointer-events-none opacity-0' : ''
-          }`}
-        >
-          <ArrowLeftIcon className="h-5 w-5 [&_.arrow-path]:fill-gray-200 group-hover:[&_.arrow-path]:fill-gray-400 group-active:[&_.arrow-path]:fill-gray-400" />
-        </button>
 
         <button
           className={`swiper-button-next group absolute right-[-40px] top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full text-grey-50 transition-colors hover:text-grey-100 active:text-grey-200 ${

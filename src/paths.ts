@@ -2,7 +2,7 @@ export const PATHS = {
   HOME: '/',
   PRODUCTS: {
     list: '/products',
-    details: '/products/:id',
+    details: '/ad/:ad_id',
     add: '/add-product',
     category: '/products/category/',
   },
@@ -32,8 +32,8 @@ export const API_ENDPOINTS = {
     approve: 'ads/{ad_id}/approve/',
     reject: 'ads/{ad_id}/reject/',
     faq: 'listings/faq/',
-    categoriesList: '/listings/categories/',
-    recommendations: '/listings/recommendations/',
+    categoriesList: 'listings/categories/',
+    recommendations: 'listings/recommendations/',
   },
   AUTH: {
     login: 'user/login/',
@@ -45,6 +45,9 @@ export const API_ENDPOINTS = {
     forgot: 'user/forgot-password/',
     reset: 'user/reset-password/',
     change: 'user/change-password/',
+  },
+  AD: {
+    details: '/listings/{ad_id}',
   },
   PROFILE: {
     get: 'user/profile/',

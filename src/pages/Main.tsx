@@ -4,7 +4,7 @@ const Main = () => {
   return (
     <div>
       <CategoriesSection />
-      <RecommendedSection />
+      <RecommendedSection slideView={2} text="Вам може сподобатися" variant="home" />
       <NewsCard />
       <FAQSection />
     </div>
