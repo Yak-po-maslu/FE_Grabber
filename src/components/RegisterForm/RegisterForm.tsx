@@ -32,9 +32,6 @@ const RegisterForm: React.FC = () => {
       {
         email: data.email.toLowerCase(),
         password: data.password,
-        first_name: data.first_name,
-        last_name: data.last_name,
-        phone_number: data.phone_number,
       },
       {
         onSuccess: (response) => {
@@ -58,45 +55,6 @@ const RegisterForm: React.FC = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="auth-register-form">
       <h1 className="mb-7 text-center text-3xl font-medium">Реєстрація</h1>
-      {/* Поле для введення імені */}
-      <section className="auth-register-form-section">
-        <label className={`w-full ${errors.first_name ? 'warning-icon-for-input' : ''}`}>
-          <input
-            type="text"
-            {...register('first_name')}
-            id="register-name"
-            className={`input-text ${errors.first_name ? 'border-error-default' : ''}`}
-            placeholder="Ім'я"
-          />
-        </label>
-        {errors.first_name && <p className="error-text">{errors.first_name.message}</p>}
-      </section>
-      {/* Поле для введення прізвища */}
-      <section className="auth-register-form-section">
-        <label className={`w-full ${errors.last_name ? 'warning-icon-for-input' : ''}`}>
-          <input
-            type="text"
-            {...register('last_name')}
-            id="register-surname"
-            className={`input-text ${errors.last_name ? 'border-error-default' : ''}`}
-            placeholder="Прізвище"
-          />
-        </label>
-        {errors.last_name && <p className="error-text">{errors.last_name.message}</p>}
-      </section>
-      {/* Поле для введення номера телефону */}
-      <section className="auth-register-form-section">
-        <label className={`w-full ${errors.phone_number ? 'warning-icon-for-input' : ''}`}>
-          <input
-            type="text"
-            {...register('phone_number')}
-            id="register-phone"
-            className={`input-text ${errors.phone_number ? 'border-error-default' : ''}`}
-            placeholder="Номер телефону"
-          />
-        </label>
-        {errors.phone_number && <p className="error-text">{errors.phone_number.message}</p>}
-      </section>
       {/* Поле для введення електронної пошти */}
       <section className="auth-register-form-section">
         <label className={`w-full ${errors.email ? 'warning-icon-for-input' : ''}`}>
@@ -105,7 +63,7 @@ const RegisterForm: React.FC = () => {
             {...register('email')}
             id="register-email"
             className={`input-text ${errors.email ? 'border-error-default' : ''}`}
-            placeholder="Електронна пошта"
+            placeholder="Email"
           />
         </label>
         {errors.email && <p className="error-text">{errors.email.message}</p>}
@@ -141,11 +99,12 @@ const RegisterForm: React.FC = () => {
         {errors.confirmPassword && <p className="error-text">{errors.confirmPassword.message}</p>}
       </section>
       <section className="auth-register-form-section">
-        <ul className="text-grey-600 flex list-inside list-disc flex-col gap-0 self-start text-d1">
+        <ul className="flex list-inside list-disc flex-col gap-0 self-start text-d1 text-grey-600">
           <p className="mb-4">Пароль має містити:</p>
-          <li className="ml-2 pl-2">мінімум 6 символів</li>
+          <li className="ml-2 pl-2">мінімум 8 символів</li>
           <li className="ml-2 pl-2">хоча б одну велику літеру</li>
           <li className="ml-2 pl-2">хоча б одну цифру</li>
+          <li className="ml-2 pl-2">хоча б 1 спеціальний символ (!@#^*$%?_&gt;)</li>
         </ul>
       </section>
 

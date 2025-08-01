@@ -44,8 +44,9 @@ export const passwordSchema = z
     message: 'Паролі мають збігатися',
   })
 
-export const registerSchema = baseUserSchema
-  .extend({
+export const registerSchema = z
+  .object({
+    email: z.string().nonempty("Електронна пошта є обов'язковою").email('Некоректний e-mail'),
     password: passwordValidation,
     confirmPassword: z.string().nonempty("Підтвердження паролю є обов'язковим"),
   })
