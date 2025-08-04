@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom'
-import { AdType } from '../../../types/productTypes.ts'
 import ArrowIcon from '../../../assets/icons/arrow-icon.svg?react'
 import LocationIcon from '../../../assets/icons/location-icon.svg?react'
 import defaultAvatar from '../../../assets/images/defaultAvatar.svg'
+import { AdType } from '../../../types/productTypes.ts'
 import { FavoriteIcon } from '../../../components'
+import { PATHS } from '../../../paths'
 
 type Props = {
   ad: AdType
@@ -30,7 +31,7 @@ const RecommendedCard = ({ ad, cardClassName = '' }: Props) => {
 
         <div className="flex items-center justify-between pt-8">
           <h3 className="text-s1 text-grey-950">{ad.title}</h3>
-          <Link to="#">
+          <Link to={PATHS.PRODUCTS.details.replace(':ad_id', ad.id.toString())}>
             <ArrowIcon aria-label="Arrow icon" className="text-grey-950" />
           </Link>
         </div>

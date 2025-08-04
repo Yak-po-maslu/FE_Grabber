@@ -18,7 +18,7 @@ const useToggleFavorite = () => {
       } else {
         return fetchUserData({
           method: 'DELETE',
-          path: API_ENDPOINTS.ADS.removeFavorite.replace('{product_id}', String(product_id)),
+          path: API_ENDPOINTS.ADS.removeFavorite.replace('{product_id}', product_id),
         })
       }
     },
