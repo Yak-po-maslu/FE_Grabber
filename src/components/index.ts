@@ -59,3 +59,9 @@ export { default as EditPasswordForm } from './EditProfile/EditPasswordForm'
 export { default as FavoriteIcon } from './FavoriteIcon/FavoriteIcon'
 
 export { default as PasswordRequirements } from './PasswordRequirements/PasswordRequirements'
+
+export { default as Comments } from './Comments/Comments'
+
+export { default as Comment } from './Comment/Comment'
+
+export { default as StarRating } from './StarRating/StarRating'

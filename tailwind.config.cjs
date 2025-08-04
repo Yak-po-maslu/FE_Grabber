@@ -46,6 +46,9 @@ module.exports = {
         },
         warning: {
           40: 'rgba(81, 91, 218, 0.4)',
+          notification: {
+            300: '#ECE05B',
+          },
         },
         error: {
           default: '#DB0808',

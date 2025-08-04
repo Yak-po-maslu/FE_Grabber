@@ -1,11 +1,16 @@
-export const formatDate = (date: Date) => {
+export const formatDate = (date: string, isShort: boolean = false) => {
   const datetime = new Date(date)
 
-  const formattedDate = datetime.toLocaleDateString('uk-UA', {
+  if (isShort)
+    return datetime.toLocaleDateString('uk-UA', {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+    })
+
+  return datetime.toLocaleDateString('uk-UA', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   })
-
-  return formattedDate
 }
