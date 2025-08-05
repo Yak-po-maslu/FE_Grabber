@@ -52,7 +52,7 @@ export const API_ENDPOINTS = {
     change: 'user/change-password/',
   },
   AD: {
-    details: '/listings/{ad_id}',
+    details: '/listings/{ad_id}/',
   },
   PROFILE: {
     get: 'user/profile/',

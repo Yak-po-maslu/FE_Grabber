@@ -59,3 +59,9 @@ export { default as EditPasswordForm } from './EditProfile/EditPasswordForm'
 export { default as FavoriteIcon } from './FavoriteIcon/FavoriteIcon'
 
 export { default as PasswordRequirements } from './PasswordRequirements/PasswordRequirements'
+
+export { default as AdInfo } from './AdDetails/AdInfo.tsx'
+
+export { default as ImageGallery } from './AdDetails/ImageGallery'
+
+export { default as Counter } from './AdDetails/Counter'
