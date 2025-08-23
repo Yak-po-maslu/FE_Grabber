@@ -7,12 +7,15 @@ import BasketIcon from '../../assets/images/basketIcon.svg?react'
 import BurgerMenu from '../../assets/icons/burger_menu.svg?react'
 import CategoriesMenu from './CategoriesMenu'
 import { useEffect, useRef, useState } from 'react'
+import useCartStore from '../../store/cartStore.ts'
 
 const Navbar = () => {
   const user = userProfileStore()
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const ref = useRef<HTMLDivElement | null>(null)
   const { category } = useParams()
+  const cartItems = useCartStore((state) => state.items)
+  const totalCount = cartItems.reduce((sum, item) => sum + item.quantity, 0)
 
   useEffect(() => {
     function handleClick(event: MouseEvent) {
@@ -52,9 +55,16 @@ const Navbar = () => {
       <Link to={PATHS.PRODUCTS.add}>
         <button className="light-button">Створити оголошення</button>
       </Link>
-      <Link to="#">
-        <BasketIcon />
-      </Link>
+      <div className="relative">
+        <Link to="#">
+          <BasketIcon />
+          {totalCount > 0 && (
+            <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white">
+              {totalCount}
+            </span>
+          )}
+        </Link>
+      </div>
       {user.isLoggedIn ? (
         <Menu />
       ) : (

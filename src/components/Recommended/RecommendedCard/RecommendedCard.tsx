@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom'
-import { AdType } from '../../../types/productTypes.ts'
 import ArrowIcon from '../../../assets/icons/arrow-icon.svg?react'
 import LocationIcon from '../../../assets/icons/location-icon.svg?react'
 import defaultAvatar from '../../../assets/images/defaultAvatar.svg'
+import { AdType } from '../../../types/productTypes.ts'
 import { FavoriteIcon } from '../../../components'
+import { PATHS } from '../../../paths'
 
 type Props = {
   ad: AdType
@@ -29,13 +30,15 @@ const RecommendedCard = ({ ad, cardClassName = '' }: Props) => {
         </div>
 
         <div className="flex items-center justify-between pt-8">
-          <h3 className="text-s1 text-grey-950">{ad.title}</h3>
-          <Link to="#">
+          <h3 className="line-clamp-1 min-h-[28px] text-s1 text-grey-950">{ad.title}</h3>
+          <Link to={PATHS.PRODUCTS.details.replace(':ad_id', ad.id.toString())}>
             <ArrowIcon aria-label="Arrow icon" className="text-grey-950" />
           </Link>
         </div>
 
-        <p className="mt-3 truncate text-b4 text-grey-500">{ad.description}</p>
+        <p className="mt-3 overflow-hidden truncate text-ellipsis whitespace-nowrap text-b4 text-grey-500">
+          {ad.description}
+        </p>
         <p className="mt-3 text-b3 text-grey-950">{ad.price} грн</p>
 
         <div className="mt-6 flex items-center gap-4 pb-2">
