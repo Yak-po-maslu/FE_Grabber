@@ -14,6 +14,7 @@ import {
   EditProfile,
   Main,
   ChangeUserEmail,
+  CategoryPage,
 } from '../pages'
 import { PATHS } from '../paths'
 import ChangeUserPassword from '../pages/ChangeUserPassword'
@@ -38,7 +39,7 @@ export const routes = [
       },
       {
         path: `${PATHS.PRODUCTS.category}:category`,
-        element: <Products />,
+        element: <CategoryPage />,
       },
       {
         path: PATHS.PRODUCTS.details,

@@ -12,7 +12,7 @@ const PageWrapper = () => {
   return (
     <>
       <Header />
-      <section className="content mt-[80px] h-auto min-h-full w-full flex-grow items-center">
+      <section className="content mt-[90px] h-auto min-h-full w-full flex-grow items-center">
         <Outlet />
       </section>
       <Footer />

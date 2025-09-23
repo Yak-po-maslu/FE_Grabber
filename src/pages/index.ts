@@ -27,3 +27,5 @@ export { default as EditProfile } from './EditProfile'
 export { default as ChangeUserEmail } from './ChangeUserEmail'
 
 export { default as ChangeUserPassword } from './ChangeUserPassword'
+
+export { default as CategoryPage } from './CategoryPage'
