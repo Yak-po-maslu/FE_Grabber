@@ -27,7 +27,7 @@ const Modal: React.FC<ModalProps> = ({ onClose, children }) => {
       onClick={onClose}
     >
       <div
-        className="relative overflow-y-auto rounded-xl bg-white p-6"
+        className="relative overflow-y-auto rounded-xl bg-white px-6 py-8"
         onClick={(e) => e.stopPropagation()}
       >
         <button className="close-button" onClick={onClose}></button>

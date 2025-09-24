@@ -56,11 +56,13 @@ const ImageGallery = ({ images, title, product_id }: Props) => {
 
       {isModalOpen && (
         <Modal onClose={handleCloseModal}>
-          <img
-            src={mainImage}
-            alt={`${title} zoomed`}
-            className="max-h-[80vh] max-w-[90vw] object-contain"
-          />
+          <div className="flex h-[50vh] w-[40vw] items-center justify-center">
+            <img
+              src={mainImage}
+              alt={`${title} zoomed`}
+              className="h-full w-full rounded-lg object-cover"
+            />
+          </div>
         </Modal>
       )}
     </div>

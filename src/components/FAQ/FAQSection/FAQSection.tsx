@@ -1,8 +1,8 @@
 import React from 'react'
-import FAQItem from '../FAQItem/FAQItem'
-import useFetchFAQItems from '../../api/useFetchFAQItems'
-import QuestionPrompt from './QuestionPrompt'
-import NewsCard from '../NewsCard/NewsCard'
+import FAQItem from '../FAQItem/FAQItem.tsx'
+import useFetchFAQItems from '../../../api/useFetchFAQItems.ts'
+import QuestionPrompt from './QuestionPrompt.tsx'
+import NewsCard from '../../NewsCard/NewsCard.tsx'
 
 interface FAQSectionProps {}
 

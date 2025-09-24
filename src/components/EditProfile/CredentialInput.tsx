@@ -1,13 +1,16 @@
+import { useState } from 'react'
 import { FieldError, UseFormRegister } from 'react-hook-form'
-import errorIcon from '../../assets/icons/exclamation-icon.svg'
+import ErrorIcon from '../../assets/icons/exclamation-icon.svg?react'
+import ShowIcon from '../../assets/icons/eye-icon.svg?react'
+import CloseIcon from '../../assets/icons/closed-eye-icon.svg?react'
 
 type Props = {
   register: UseFormRegister<any>
-  visiblePassword?: boolean
   error?: FieldError
   name:
     | 'current_email'
     | 'new_email'
+    | 'email'
     | 'password'
     | 'confirm_password'
     | 'new_password'
@@ -17,34 +20,44 @@ type Props = {
   type?: string
 }
 
-const CredentialInput = ({
-  register,
-  visiblePassword = false,
-  error,
-  name,
-  placeholder,
-  className,
-  type,
-}: Props) => {
+const CredentialInput = ({ register, error, name, placeholder, className, type }: Props) => {
+  const [showPassword, setShowPassword] = useState(false)
+
+  const isPassword = type === 'password'
+  const inputType = isPassword ? (showPassword ? 'text' : 'password') : type
+
   return (
-    <>
-      <input
-        disabled={false}
-        {...register(name, { required: true })}
-        placeholder={placeholder}
-        className={`input-text ${className} ${error && 'border-error-default'}`}
-        type={visiblePassword ? 'text' : type}
-      />
+    <div className="relative">
+      <div className="relative w-full">
+        <input
+          {...register(name, { required: true })}
+          placeholder={placeholder}
+          type={inputType}
+          className={`input-text pr-10 ${className} ${error ? 'border-error-default' : ''}`}
+        />
+
+        {isPassword && (
+          <button
+            type="button"
+            onClick={() => setShowPassword((prev) => !prev)}
+            className="absolute inset-y-0 right-3 flex items-center"
+          >
+            {showPassword ? (
+              <CloseIcon className="h-[24px] w-[24px]" />
+            ) : (
+              <ShowIcon className="h-[24px] w-[24px]" />
+            )}
+          </button>
+        )}
+      </div>
+
       {error && (
-        <>
-          <span className="error-text ml-5 self-start text-xs">{error.message}</span>
-          <img
-            className="absolute right-[40px] top-[13px] h-[1.13rem] w-[1.13rem]"
-            src={errorIcon}
-          />
-        </>
+        <div className="mt-1 flex items-center gap-2 text-error-default">
+          <ErrorIcon className="h-[24px] w-[24px]" />
+          <span className="text-d1 text-error-default">{error.message}</span>
+        </div>
       )}
-    </>
+    </div>
   )
 }
 

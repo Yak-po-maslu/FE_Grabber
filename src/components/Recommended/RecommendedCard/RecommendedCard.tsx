@@ -32,7 +32,7 @@ const RecommendedCard = ({ ad, cardClassName = '' }: Props) => {
         <div className="flex items-center justify-between pt-8">
           <h3 className="line-clamp-1 min-h-[28px] text-s1 text-grey-950">{ad.title}</h3>
           <Link to={PATHS.PRODUCTS.details.replace(':ad_id', ad.id.toString())}>
-            <ArrowIcon aria-label="Arrow icon" className="text-grey-950" />
+            <ArrowIcon aria-label="Arrow icon" className="text-primary-950" />
           </Link>
         </div>
 

@@ -1,9 +1,9 @@
 import React from 'react'
-import { StarRating } from '../'
+import { StarRating } from '../../index.ts'
 import { useLocation } from 'react-router-dom'
-import useFetchComments from '../../api/useFetchComments'
-import UserAvatar from '../../assets/icons/persona-icon.svg?react'
-import { formatDate } from '../../features/formatDate'
+import useFetchComments from '../../../api/useFetchComments.ts'
+import UserAvatar from '../../../assets/icons/persona-icon.svg?react'
+import { formatDate } from '../../../features/formatDate.ts'
 
 interface CommentsProps {}
 

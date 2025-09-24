@@ -40,9 +40,9 @@ const Navbar = () => {
           <input
             type="text"
             placeholder="Пошук товарів"
-            className="ml-4 h-[40px] w-full rounded-[20px] bg-primary-950 placeholder:pl-[1rem] placeholder:text-b3 placeholder:font-normal focus:border-r-0 focus:outline-none"
+            className="ml-4 h-[40px] w-full rounded-[20px] bg-primary-950 placeholder:pl-[1rem] placeholder:text-b3 placeholder:font-normal placeholder:text-secondary-brown-100/50 focus:border-r-0 focus:outline-none"
           />
-          <SearchIcon className="absolute left-4 top-1/2 block h-5 h-[24px] w-5 w-[24px] -translate-y-1/2 transform text-transp-50" />
+          <SearchIcon className="absolute left-4 top-1/2 block h-[24px] w-[24px] -translate-y-1/2 transform text-transp-50" />
           <div ref={ref} onClick={() => setIsOpen(!isOpen)} className="flex">
             <button className="whitespace-nowrap pr-4">
               | {(category && decodeURIComponent(category)) || 'Категорії'}
@@ -53,7 +53,7 @@ const Navbar = () => {
         </div>
       </div>
       <Link to={PATHS.PRODUCTS.add}>
-        <button className="light-button">Створити оголошення</button>
+        <button className="light-button min-w-btn-medium">Створити оголошення</button>
       </Link>
       <div className="relative">
         <Link to="#">

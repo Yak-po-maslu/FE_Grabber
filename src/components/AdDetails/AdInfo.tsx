@@ -28,7 +28,7 @@ const AdInfo = ({ ad_id }: Props) => {
   return (
     <div className="m-auto mb-[160px] flex max-w-container flex-col gap-[46px] pt-8">
       <p className="text-b3 text-grey-400">
-        Категорії <span className="text-grey-800">{data.category}</span>
+        Категорії / <span className="text-b3 text-grey-800">{data.category}</span>
       </p>
 
       <div className="flex gap-[100px]">
@@ -41,28 +41,32 @@ const AdInfo = ({ ad_id }: Props) => {
         </div>
 
         <div className="flex w-1/2 flex-col">
-          <h2 className="pb-8 font-kyiv text-h3 font-bold">{data.title}</h2>
-          <p className="min-h-[250px] pb-8 text-b3 text-grey-800">{data.description}</p>
+          <h2 className="title-h2 pb-8">{data.title}</h2>
+          <p className="description-add min-h-[250px] pb-8">{data.description}</p>
 
           <div className="pb-[61px]">
-            <span className="pb-2 text-d1 text-grey-600">Місце виготовлення виробу</span>
-            <div className="flex items-center gap-2">
+            <span className="description-info pb-2">Місце виготовлення виробу</span>
+            <div className="flex items-center gap-4">
               <LocationIcon className="text-primary-950" />
-              <span className="text-primary-900 text-b2">{data.location}</span>
+              <span className="text-b2 text-grey-950">{data.location}</span>
             </div>
           </div>
 
           <div className="flex flex-col gap-2 pb-8">
-            <p className="text-b1">{data.price} грн.</p>
-            <span className="text-d1 text-grey-600">
+            <p className="text-b1 text-grey-950">{data.price} грн.</p>
+            <span className="description-info">
               Вартість доставки розраховується при оформленні замовлення
             </span>
           </div>
 
-          <span className="pb-2 text-d1 text-grey-600">Кількість</span>
-          <div className="flex gap-4">
+          <span className="description-info pb-2">Кількість</span>
+          <div className="flex gap-6">
             <Counter count={count} setCount={setCount} />
-            <Button text="Додати в кошик" className="h-[40px] py-0" onClick={handleAddToCart} />
+            <Button
+              text="Додати в кошик"
+              className="button h-[40px] min-w-btn-medium py-0"
+              onClick={handleAddToCart}
+            />
           </div>
         </div>
       </div>

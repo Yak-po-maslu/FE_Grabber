@@ -16,7 +16,7 @@ export { default as ForgotPasswordForm } from './ForgotPasswordForm/ForgotPasswo
 
 export { default as LogOutButton } from './LogOutButton/LogOutButton'
 
-export { default as ResetPasswordForm } from './ResetPasswordForm/ResetPasswordForm'
+export { default as ResetPasswordForm } from './ForgotPasswordForm/ResetPasswordForm.tsx'
 
 export { default as Menu } from './Menu/Menu'
 
@@ -40,15 +40,15 @@ export { default as RecommendedSection } from './Recommended/RecommendedSection/
 
 export { default as RecommendedCard } from './Recommended/RecommendedCard/RecommendedCard'
 
-export { default as FAQSection } from './FAQSection/FAQSection'
+export { default as FAQSection } from './FAQ/FAQSection/FAQSection'
 
-export { default as FAQItem } from './FAQItem/FAQItem'
+export { default as FAQItem } from './FAQ/FAQItem/FAQItem'
 
-export { default as CategoriesSection } from './CategoriesSection/CategoriesSection'
+export { default as CategoriesSection } from './Category/CategoriesSection/CategoriesSection'
 
-export { default as CategoryCard } from './CategoryCard/CategoryCard'
+export { default as CategoryCard } from './Category/CategoryCard/CategoryCard'
 
-export { default as CategoryLoader } from './CategoryLoader/CategoryLoader'
+export { default as CategoryLoader } from './Category/CategoryLoader/CategoryLoader'
 
 export { default as UserInfoItem } from './UserInfoItem/UserInfoItem'
 
@@ -66,7 +66,7 @@ export { default as ImageGallery } from './AdDetails/ImageGallery'
 
 export { default as Counter } from './AdDetails/Counter'
 
-export { default as Comments } from './Comments/Comments'
+export { default as Comments } from './Comment/Comments/Comments'
 
 export { default as Comment } from './Comment/Comment'
 
@@ -75,3 +75,5 @@ export { default as StarRating } from './StarRating/StarRating'
 export { default as AnimationSection } from './MainSections/AnimationSection'
 
 export { default as SliderSection } from './MainSections/SliderSection'
+
+export { default as PopularSection } from './MainSections/PopularSection'

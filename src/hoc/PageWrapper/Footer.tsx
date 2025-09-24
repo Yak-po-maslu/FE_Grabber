@@ -1,6 +1,7 @@
 import AboutLink from './AboutLink'
 import Section from './Section'
 import ornament from '../../assets/images/ornament .svg'
+import { PATHS } from '../../paths.ts'
 
 const Footer = () => {
   return (
@@ -34,15 +35,15 @@ const Footer = () => {
         </Section>
         <Section>
           <p className="text-s1">ДОПОМОГА</p>
-          <AboutLink text="Клієнтська підтримка" />
-          <AboutLink text="Terms & Conditions" />
-          <AboutLink text="Privacy Policy" />
+          <AboutLink text="Клієнтська підтримка" link={PATHS.SOON} />
+          <AboutLink text="Terms & Conditions" link={PATHS.SOON} />
+          <AboutLink text="Privacy Policy" link={PATHS.SOON} />
         </Section>
         <Section className="pt-[12px]">
           <AboutLink text="Про нас" />
           <AboutLink text="Категорії" />
-          <AboutLink text="Контакти" />
-          <AboutLink text="FAQ" />
+          <AboutLink text="Контакти" link={PATHS.SOON} />
+          <AboutLink text="FAQ" link={PATHS.FAQ} />
         </Section>
       </div>
     </div>

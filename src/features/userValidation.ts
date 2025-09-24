@@ -83,13 +83,13 @@ export const resetPasswordSchema = z
       .string()
       .nonempty("Пароль є обов'язковим")
       .min(6, 'Пароль має містити щонайменше 8 символів'),
-    confirmPassword: z.string().nonempty("Підтвердження паролю є обов'язковим"),
+    confirm_password: z.string().nonempty("Підтвердження паролю є обов'язковим"),
   })
   .superRefine((data, ctx) => {
-    if (data.confirmPassword !== data.password) {
+    if (data.confirm_password !== data.password) {
       ctx.addIssue({
         code: 'custom',
-        path: ['confirmPassword'],
+        path: ['confirm_password'],
         message: 'Паролі не збігаються',
       })
     }

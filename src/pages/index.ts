@@ -28,4 +28,6 @@ export { default as ChangeUserEmail } from './ChangeUserEmail'
 
 export { default as ChangeUserPassword } from './ChangeUserPassword'
 
+export { default as ComingSoon } from './ComingSoon'
+
 export { default as CategoryPage } from './CategoryPage'

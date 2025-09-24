@@ -1,17 +1,14 @@
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
-import { editEmailSchema } from '../../features/userValidation'
-import showIcon from '../../assets/icons/eye-icon.svg'
-import { useEffect, useState } from 'react'
-import CredentialInput from './CredentialInput'
-import Button from '../Button/Button'
 import { Link, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { editEmailSchema } from '../../features/userValidation'
+import { toast } from 'react-hot-toast'
 import { PATHS } from '../../paths'
 import fetchChangeEmail from '../../api/useFetchChangeEmail'
-import CustomToaster from '../CustomToaster/CustomToaster'
+import { CustomToaster, Button, CredentialInput } from '../../components'
 
 const EditEmailForm = () => {
-  const [showPassword, setShowPassword] = useState<boolean>(false)
   const { mutate: changeEmail, isSuccess } = fetchChangeEmail()
   const navigate = useNavigate()
   const {
@@ -30,18 +27,16 @@ const EditEmailForm = () => {
   }
 
   useEffect(() => {
-    isSuccess && navigate(PATHS.PROFILE.profile)
-  }, [isSuccess])
-
-  useEffect(() => {
-    if (showPassword) {
-      const timer = setTimeout(() => {
-        setShowPassword(false)
-      }, 2000)
-
-      return () => clearTimeout(timer)
+    if (isSuccess) {
+      toast.success('E-mail успішно змінено!', {
+        id: 'change-email',
+        duration: 3000,
+      })
+      setTimeout(() => {
+        navigate(PATHS.PROFILE.profile)
+      }, 3000)
     }
-  }, [showPassword])
+  }, [isSuccess, navigate])
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="auth-register-form">
@@ -60,22 +55,14 @@ const EditEmailForm = () => {
         error={errors.new_email}
         placeholder="Введіть новий e-mail"
       />
-      <div className="relative">
-        <CredentialInput
-          register={register}
-          visiblePassword={showPassword}
-          className="mb-8"
-          name="password"
-          type="password"
-          placeholder="Введіть пароль"
-          error={errors.password}
-        />
-        <img
-          onClick={() => setShowPassword(true)}
-          className="absolute right-[15px] top-[15px]"
-          src={showIcon}
-        />
-      </div>
+      <CredentialInput
+        register={register}
+        className="mb-2"
+        name="password"
+        type="password"
+        placeholder="Введіть пароль"
+        error={errors.password}
+      />
       <Link to={PATHS.PASSWORD.forgot} className="ml-2 text-grey-500 underline">
         Забули пароль?
       </Link>

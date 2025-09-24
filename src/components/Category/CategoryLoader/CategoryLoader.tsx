@@ -1,5 +1,5 @@
 import React from 'react'
-import IconPlaceholderImg from '../../assets/images/placeholder-loader-category.svg?react'
+import IconPlaceholderImg from '../../../assets/images/placeholder-loader-category.svg?react'
 
 interface CategoryLoaderProps {
   countItems: number

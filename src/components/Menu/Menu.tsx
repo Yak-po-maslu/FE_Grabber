@@ -27,7 +27,7 @@ const Menu = () => {
       </Button>
       {isOpen && (
         <div
-          className="absolute right-0 z-50 mt-2 w-48 overflow-hidden rounded-[20px] border bg-primary-50 text-black text-grey-800 shadow-[4px_4px_16px_0px_#00000026] shadow-xl"
+          className="absolute right-0 z-50 mt-2 w-48 overflow-hidden rounded-[20px] border bg-primary-50 text-grey-800 shadow-xl"
           onClick={(e) => e.stopPropagation()}
         >
           <button
@@ -35,14 +35,14 @@ const Menu = () => {
               setIsOpen(false)
               navigate(PATHS.PROFILE.profile)
             }}
-            className="w-full px-4 py-2 transition-colors duration-300 hover:bg-grey-200"
+            className="w-full px-4 py-2 transition-colors duration-300 hover:bg-secondary-brown-100"
           >
             Профіль
           </button>
-          <button className="w-full px-4 py-2 transition-colors duration-300 hover:bg-grey-200">
+          <button className="w-full px-4 py-2 transition-colors duration-300 hover:bg-secondary-brown-100">
             Мої оголошення
           </button>
-          <button className="w-full px-4 py-2 transition-colors duration-300 hover:bg-grey-200">
+          <button className="w-full px-4 py-2 transition-colors duration-300 hover:bg-secondary-brown-100">
             Вподобані
           </button>
           <div className="mx-4 h-px bg-grey-800"></div>
@@ -51,7 +51,7 @@ const Menu = () => {
               setIsOpen(false)
               setShowModal(true)
             }}
-            className="w-full px-4 py-2 transition-colors duration-300 hover:bg-grey-200"
+            className="w-full px-4 py-2 transition-colors duration-300 hover:bg-secondary-brown-100"
           >
             Вихід
           </button>

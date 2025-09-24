@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { PATHS } from '../../paths'
-import CategoryCard from '../CategoryCard/CategoryCard'
-import useFetchCategories from '../../api/useFetchCategories'
-import CategoryLoader from '../CategoryLoader/CategoryLoader'
+import { PATHS } from '../../../paths.ts'
+import CategoryCard from '../CategoryCard/CategoryCard.tsx'
+import useFetchCategories from '../../../api/useFetchCategories.ts'
+import CategoryLoader from '../CategoryLoader/CategoryLoader.tsx'
 
 interface CategoriesSectionProps {}
 

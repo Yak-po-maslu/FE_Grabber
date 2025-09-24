@@ -25,7 +25,7 @@ const BuySellSection = () => {
           </p>
           <p className="text-b2">Локально або по всій Україні</p>
           <Link to={PATHS.AUTH.register}>
-            <Button className="mt-8" text="Зареєструватися" />
+            <Button className="mt-8 min-w-[223px]" text="Зареєструватися" />
           </Link>
         </div>
       </div>

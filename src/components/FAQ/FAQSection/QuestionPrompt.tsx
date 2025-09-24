@@ -1,5 +1,5 @@
-import SupportAvatar from '../../assets/images/supportAvatar.svg?react'
-import Button from '../Button/Button'
+import SupportAvatar from '../../../assets/images/supportAvatar.svg?react'
+import Button from '../../Button/Button.tsx'
 
 const QuestionPrompt = () => {
   return (

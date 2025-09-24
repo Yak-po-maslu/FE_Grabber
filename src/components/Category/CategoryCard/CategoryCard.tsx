@@ -1,5 +1,5 @@
 import React from 'react'
-import { TCategory } from '../../types/categoryTypes'
+import { TCategory } from '../../../types/categoryTypes.ts'
 
 interface CategoryCardProps extends TCategory {}
 

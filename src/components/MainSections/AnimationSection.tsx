@@ -4,14 +4,16 @@ import frameIcon from '../../assets/images/frame355.svg'
 
 const AnimationSection = () => {
   return (
-    <div className="relative">
-      <div className="mx-[120px] flex justify-evenly">
-        {Array.from({ length: 20 }).map((_, i) => (
-          <img key={i} src={icon} className="h-[23px] w-[37px]" alt="" />
-        ))}
+    <div className="relative m-auto mt-[167px] max-w-container">
+      <div className="flex w-full items-center">
+        <div className="flex flex-1 justify-evenly gap-2">
+          {Array.from({ length: 20 }).map((_, i) => (
+            <img key={i} src={icon} className="h-[23px] w-[37px]" alt="" />
+          ))}
+        </div>
       </div>
-      <img src={icon} className="absolute left-[90px] top-[55px] -rotate-90" alt="" />
-      <div className="mx-[120px] flex h-[85px] rounded-t-[20px] border border-grey-950 bg-secondary-brown-100 p-4 font-kyiv text-h21">
+
+      <div className="flex h-[85px] w-full rounded-t-[20px] border border-grey-950 bg-secondary-brown-100 p-4 font-kyiv text-h21">
         <div className="relative w-full overflow-hidden text-left">
           <div className="absolute w-full animate-slide1">
             <p>Купуйте виготовлене</p>
@@ -29,7 +31,7 @@ const AnimationSection = () => {
           </div>
         </div>
       </div>
-      <img src={icon} className="absolute right-[90px] top-[55px] rotate-90" alt="" />
+
       <img className="m-auto" src={symbolIcon} alt="" />
       <img className="m-auto" src={frameIcon} alt="" />
     </div>

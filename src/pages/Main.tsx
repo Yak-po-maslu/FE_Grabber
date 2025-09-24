@@ -1,10 +1,5 @@
 import { Link } from 'react-router-dom'
-import {
-  CategoriesSection,
-  RecommendedSection,
-  AnimationSection,
-  SliderSection,
-} from '../components'
+import { RecommendedSection, AnimationSection, SliderSection, PopularSection } from '../components'
 import { PATHS } from '../paths'
 import BuySellSection from '../components/MainSections/BuySellSection'
 
@@ -13,7 +8,7 @@ const Main = () => {
     <div>
       <AnimationSection />
       <SliderSection />
-      <CategoriesSection />
+      <PopularSection />
       <RecommendedSection slideView={2} text="Вам може сподобатися" variant="home" />
       <BuySellSection />
       <div className="my-[96px] text-center">

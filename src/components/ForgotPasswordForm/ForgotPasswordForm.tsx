@@ -1,11 +1,12 @@
+import { useNavigate } from 'react-router-dom'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-hot-toast'
 import { PATHS } from '../../paths'
-import useForgotPassword from '../../api/forgotPassword'
-import Button from '../Button/Button'
 import { LoginSchema } from '../../features/userValidation'
+import useForgotPassword from '../../api/forgotPassword'
+import { Button, CredentialInput, CustomToaster } from '../../components'
 
 const emailSchema = LoginSchema.pick({ email: true })
 type EmailFormData = z.infer<typeof emailSchema>
@@ -32,39 +33,50 @@ const ForgotPasswordForm = () => {
     sendResetEmail(data, {
       onSuccess: () => {
         reset()
-        navigate(PATHS.HOME)
+        toast.success(
+          'Якщо ви вказали дійсну пошту, на неї було відправлено повідомлення для відновлення паролю.',
+          { id: 'reset-password-success', duration: 3000 },
+        )
+        setTimeout(() => {
+          navigate(PATHS.HOME)
+        }, 3000)
       },
       onError: (error) => {
+        toast.error('Помилка при відправці')
         console.error('Forgot password error:', error)
       },
     })
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="mx-auto w-[400px]">
-      <div className="flex flex-col p-5">
-        <div className="mb-20 flex flex-col gap-4">
-          <h1 className="text-center text-h3">Відновлення паролю</h1>
-          <p>
-            Введіть email, з яким ви реєструвалися. Ми надішлемо вам інструкції з відновлення
-            паролю.
-          </p>
-        </div>
-        <div className="mb-8 flex flex-col gap-4">
-          <label htmlFor="email" className="text-d1">
-            Куди вам надіслати код?
-          </label>
-          <input
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="auth-register-form mt-[160px] w-full max-w-[400px]"
+    >
+      <div className="flex flex-col">
+        <h2 className="pb-4 text-center text-h3 text-grey-950">Забули пароль?</h2>
+        <p className="pb-8 text-center text-b3 text-grey-950">
+          Введіть свій e-mail, з яким ви реєструвалися, і ми надішлемо вам інструкції відновлення
+          паролю.
+        </p>
+        <div className="flex flex-col gap-[58px]">
+          <CredentialInput
+            register={register}
+            name="email"
+            placeholder="Введіть ваш e-mail"
             type="email"
-            id="email"
+            error={errors.email}
             className="input-text"
-            placeholder="Електронна пошта"
-            {...register('email')}
           />
-          {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
+          <Button
+            text="Відправити"
+            type="submit"
+            disabled={status === 'pending'}
+            className="button h-[40px] py-0"
+          />
         </div>
-        <Button text="Відправити" type="submit" disabled={status === 'pending'} />
       </div>
+      <CustomToaster />
     </form>
   )
 }

@@ -28,9 +28,7 @@ const Input = ({
           {...rest}
           type={type}
           placeholder={placeholder}
-          className={`w-full rounded-[20px] border bg-transparent px-4 py-2 pr-10 text-primary-50 outline-none transition duration-200 ${
-            error ? 'border-error-default' : 'border-primary-50'
-          } ${className}`}
+          className={`input-text-light bg-transparent ${className} ${error && 'border-error-default'}`}
         />
         {error && (
           <div className="pointer-events-none absolute right-3 flex h-full items-center">

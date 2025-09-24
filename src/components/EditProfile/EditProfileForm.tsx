@@ -1,19 +1,21 @@
 import { Controller, useForm } from 'react-hook-form'
+import { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { editProfileSchema } from '../../features/userValidation'
 import { TEditUserForm, TUserProfile } from '../../types/types'
-import UploadAvatar from './UploadAvatar'
-import ProfileInput from './ProfileInput'
 import submitUserData from '../../api/useSubmitUserData'
 import submitUserPhoto from '../../api/useSubmitUserPhoto'
-import toast from 'react-hot-toast'
-import { useEffect, useState } from 'react'
-import DeleteUserPhoto from './DeleteUserPhoto'
-import CustomToaster from '../CustomToaster/CustomToaster'
-import Button from '../Button/Button'
-import { Link, useNavigate } from 'react-router-dom'
 import { PATHS } from '../../paths'
 import EditIcon from '../../assets/images/editPencil.svg?react'
+import {
+  UploadAvatar,
+  ProfileInput,
+  DeleteUserPhoto,
+  Button,
+  CustomToaster,
+} from '../../components'
 
 type Props = {
   user: TUserProfile

@@ -1,10 +1,10 @@
-import { Button, Input, SuccessModal } from '../../components'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { subscribeSchema } from '../../features/userValidation'
 import type { z } from 'zod'
 import useSubscribeToNewsletter from '../../api/useSubscribeToNewsletter'
-import { useState } from 'react'
+import { subscribeSchema } from '../../features/userValidation'
+import { Button, Input, SuccessModal } from '../../components'
 
 const NewsCard = () => {
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false)
@@ -35,18 +35,18 @@ const NewsCard = () => {
   }
 
   return (
-    <div className="relative bottom-[71px] min-h-[384px] bg-bg-news bg-cover bg-center bg-no-repeat">
+    <section className="relative min-h-[384px] bg-bg-news bg-cover bg-center bg-no-repeat pt-[100px]">
       {isSuccessModalOpen && (
         <div className="absolute inset-0 z-20 flex items-center justify-center px-2 py-10">
-          <div className="w-full max-w-[1200px]">
+          <div className="w-full max-w-container">
             <SuccessModal onClose={() => setIsSuccessModalOpen(false)} />
           </div>
         </div>
       )}
 
-      <div className="absolute inset-0 bg-black/40" />
-      <div className="relative z-10 mx-auto max-w-[1200px] px-4">
-        <h2 className="py-20 text-center text-h3 text-primary-50">Будь у курсі новинок</h2>
+      <div className="absolute inset-0 bg-black/70" />
+      <div className="relative z-10 mx-auto max-w-[1200px]">
+        <h2 className="pb-20 text-center text-h2 text-primary-30">Будь у курсі новинок</h2>
         <form className="flex gap-6 pb-24" onSubmit={handleSubmit(onSubmit)}>
           <Input
             name="first_name"
@@ -65,13 +65,13 @@ const NewsCard = () => {
             <Button
               type="submit"
               text="Підписатися"
-              className="button-second"
+              className="light-button text-grey-950"
               disabled={isSubmitting}
             />
           </div>
         </form>
       </div>
-    </div>
+    </section>
   )
 }
 
