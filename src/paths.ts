@@ -5,6 +5,7 @@ export const PATHS = {
     details: '/ad/:ad_id',
     add: '/add-product',
     category: '/products/category/',
+    favorites: '/favorites',
   },
   CART: '/cart',
   AUTH: {

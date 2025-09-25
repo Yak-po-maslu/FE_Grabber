@@ -46,6 +46,7 @@ module.exports = {
             100: '#F6ECDE',
             300: '#DFBB92',
             700: '#9A5734',
+            50: '#FBF7F1',
           },
         },
         warning: {

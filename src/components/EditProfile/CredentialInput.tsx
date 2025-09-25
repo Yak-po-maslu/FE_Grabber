@@ -27,20 +27,20 @@ const CredentialInput = ({ register, error, name, placeholder, className, type }
   const inputType = isPassword ? (showPassword ? 'text' : 'password') : type
 
   return (
-    <div className="relative">
+    <div className="relative w-full">
       <div className="relative w-full">
         <input
           {...register(name, { required: true })}
           placeholder={placeholder}
           type={inputType}
-          className={`input-text pr-10 ${className} ${error ? 'border-error-default' : ''}`}
+          className={`input-text autoComplete="new-password" appearance-none pr-10 ${className} ${error ? 'border-error-default' : ''}`}
         />
 
         {isPassword && (
           <button
             type="button"
             onClick={() => setShowPassword((prev) => !prev)}
-            className="absolute inset-y-0 right-3 flex items-center"
+            className={`${showPassword ? 'text-secondary-brown-300' : 'text-primary-950'} absolute inset-y-0 right-3 flex items-center`}
           >
             {showPassword ? (
               <CloseIcon className="h-[24px] w-[24px]" />

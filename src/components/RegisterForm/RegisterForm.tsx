@@ -9,6 +9,7 @@ import useRegister from '../../api/register'
 import userProfileStore from '../../store/userProfileStore'
 import Button from '../Button/Button'
 import PasswordRequirements from '../PasswordRequirements/PasswordRequirements'
+import CredentialInput from '../EditProfile/CredentialInput'
 
 // Тип даних форми, отриманий з схеми
 type FormData = z.infer<typeof registerSchema>
@@ -55,71 +56,58 @@ const RegisterForm: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="auth-register-form">
-      <h1 className="mb-7 text-center text-3xl font-medium">Реєстрація</h1>
       {/* Поле для введення електронної пошти */}
       <section className="auth-register-form-section">
-        <label className={`w-full ${errors.email ? 'warning-icon-for-input' : ''}`}>
-          <input
-            type="email"
-            {...register('email')}
-            id="register-email"
-            className={`input-text ${errors.email ? 'border-error-default' : ''}`}
-            placeholder="Email"
-          />
-        </label>
-        {errors.email && <p className="error-text">{errors.email.message}</p>}
+        <CredentialInput
+          type="email"
+          register={register}
+          name="email"
+          error={errors.email}
+          placeholder="Email"
+        />
       </section>
+
       {/* Поле для введення паролю */}
       <section className="auth-register-form-section">
-        <label className={`w-full ${errors.password ? 'warning-icon-for-input' : ''}`}>
-          <input
-            type="password"
-            {...register('password')}
-            id="register-password"
-            className={`input-text ${errors.password ? 'border-error-default' : ''}`}
-            placeholder="Пароль"
-          />
-        </label>
-        {errors?.password?.message?.split(`\n`).map((item, index) => (
-          <p className="error-text" key={index}>
-            {item}
-          </p>
-        ))}
+        <CredentialInput
+          type="password"
+          register={register}
+          name="password"
+          error={errors.password}
+          placeholder="Пароль"
+        />
       </section>
+
       {/* Поле для підтвердження паролю */}
       <section className="auth-register-form-section mb-4">
-        <label className={`w-full ${errors.confirmPassword ? 'warning-icon-for-input' : ''}`}>
-          <input
-            type="password"
-            {...register('confirmPassword')}
-            id="register-confirm-password"
-            className={`input-text ${errors.confirmPassword ? 'border-error-default' : ''}`}
-            placeholder="Підтвердження паролю"
-          />
-        </label>
-        {errors.confirmPassword && <p className="error-text">{errors.confirmPassword.message}</p>}
+        <CredentialInput
+          name="confirm_password"
+          type="password"
+          register={register}
+          placeholder="Підтвердження паролю"
+          error={errors.confirmPassword}
+        />
       </section>
-      <section className="auth-register-form-section">
+
+      <section className="auth-register-form-section mb-12 mt-6">
         <PasswordRequirements />
       </section>
 
       {/* Кнопка для відправки форми */}
       <Button
-        className="py-2"
+        className="py-2 disabled:bg-secondary-brown-900"
         type="submit"
         disabled={status === 'pending'}
         text="Зареєструватися"
       />
 
       {/* Посилання для переходу на сторінку входу */}
-      <section className="auth-register-form-section mb-32">
-        <p className="text-b4 text-grey-800">
-          Вже є акаунт?
-          <Link to={PATHS.AUTH.login} className="ml-2 text-grey-500 underline">
-            Увійти
-          </Link>
-        </p>
-      </section>
+      <p className="flex justify-center gap-4 text-b4">
+        Вже є акаунт?
+        <Link to={PATHS.AUTH.login} className="underline">
+          Увійти
+        </Link>
+      </p>
     </form>
   )
 }

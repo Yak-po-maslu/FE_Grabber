@@ -3,10 +3,11 @@ import { addAdsSchema } from '../features/adsValidation'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AdsImageUploader, Button } from '../components'
 import { z } from 'zod'
-import useAdsCreate from '../api/adsCreate'
 import toast, { Toaster } from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import useFetchCategories from '../api/useFetchCategories'
+import { capitalizeFirstLetter } from '../utils/capitalizeFirstLetter'
+import useAdsCreate from '../api/adsCreate'
 
 export type TFormData = z.infer<typeof addAdsSchema>
 
@@ -29,36 +30,34 @@ const AddProduct = () => {
     watch,
     setValue,
     reset,
-
+    setError,
     formState: { errors },
   } = useForm<TFormData>({
     defaultValues,
     resolver: zodResolver(addAdsSchema),
+    mode: 'onChange',
   })
 
   const { mutateAsync: createAds, isPending } = useAdsCreate()
-
   const { data: categories } = useFetchCategories()
-
   const navigate = useNavigate()
 
   const handleSubmitForm = async (data: TFormData) => {
     const newAds = new FormData()
 
-    newAds.append('title', data.title)
-    newAds.append('description', data.description)
+    newAds.append('title', capitalizeFirstLetter(data.title))
+    newAds.append('description', capitalizeFirstLetter(data.description))
     newAds.append('price', data.price)
     newAds.append('status', 'draft')
     newAds.append('category', data.category_name)
-    newAds.append('contact_name', data.contact_name)
+    newAds.append('contact_name', capitalizeFirstLetter(data.contact_name))
     newAds.append('email', data.email)
     newAds.append('phone', data.phone)
-    newAds.append('location', data.location)
+    newAds.append('location', capitalizeFirstLetter(data.location))
 
-    // Додаємо зображення (може бути File або string)
     data.images.forEach((img) => {
       if (img instanceof File) {
-        newAds.append('images', img) // бекенд має бути готовий до images[]
+        newAds.append('images', img)
       }
     })
 
@@ -195,6 +194,7 @@ const AddProduct = () => {
               {...register('location')}
               type="text"
               maxLength={100}
+              minLength={2}
               placeholder="Приклад: Полтава"
               className={`input-add-product-section ${errors.location || watchLocation.length >= 101 ? 'outline-1 outline-error-default' : ''}`}
             />
@@ -202,7 +202,7 @@ const AddProduct = () => {
           <div
             className={`flex justify-between text-d1 ${errors.title ? 'text-error-default' : 'text-grey-400'}`}
           >
-            <p>Мінімум 3 символи</p>
+            <p>Мінімум 2 символи</p>
             <p>{watchLocation.length}/100</p>
           </div>
           {(errors.location || watchLocation.length >= 101) && (
@@ -216,8 +216,8 @@ const AddProduct = () => {
           <p className="description-add-product-section">
             Перетягніть файли або натисніть для завантаження
           </p>
-
-          <AdsImageUploader setValue={setValue} watch={watch} />
+          <AdsImageUploader setValue={setValue} watch={watch} setError={setError} />
+          {errors.images && <p className="error-text">{errors.images.message}</p>}
         </section>
 
         {/* Секція для введення ціни */}

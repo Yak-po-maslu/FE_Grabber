@@ -1,60 +1,67 @@
 import React, { useRef } from 'react'
-import { UseFormSetValue, UseFormWatch } from 'react-hook-form'
+import { UseFormSetValue, UseFormWatch, UseFormSetError } from 'react-hook-form'
 import { TFormData } from '../../pages/AddProduct'
 import IconPlaseholder from '../../assets/icons/photo-icon.svg?react'
+import { validateImage } from '../../utils/validateImageFile'
 
 // Описуємо пропси для компонента
 interface AdsImageUploaderProps {
   setValue: UseFormSetValue<TFormData>
   watch: UseFormWatch<TFormData>
+  setError: UseFormSetError<TFormData>
 }
 
-const AdsImageUploader: React.FC<AdsImageUploaderProps> = ({ setValue, watch }) => {
-  // Реф для input type="file"
+const AdsImageUploader: React.FC<AdsImageUploaderProps> = ({ setValue, watch, setError }) => {
   const fileInputRef = useRef<HTMLInputElement>(null)
-  // Отримуємо поточний масив зображень з форми
   const images = watch('images')
 
-  // Обробка додавання файлів
   const handleFiles = (files: FileList | null) => {
     if (!files) return
 
-    const newFiles = Array.from(files) // Перетворюємо FileList у масив
-    const currentFiles = watch('images') || [] // Поточні файли
+    const newFiles = Array.from(files)
+    const currentFiles = watch('images') || []
 
-    // Об'єднуємо старі та нові файли, максимум 5
+    for (const file of newFiles) {
+      const error = validateImage(file)
+
+      if (error) {
+        setError('images', { message: error })
+
+        return
+      }
+    }
+
     const combined = [...currentFiles, ...newFiles].slice(0, 5)
-    setValue('images', combined, { shouldValidate: true }) // Оновлюємо значення у формі
+    setValue('images', combined, { shouldValidate: true })
+    setError('images', { type: 'manual', message: '' }) // очищаємо помилку, якщо все ок
   }
 
-  // Обробка події drag&drop
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault()
     handleFiles(e.dataTransfer.files)
   }
 
-  // Відкриваємо діалог вибору файлів
   const handleClick = () => {
     fileInputRef.current?.click()
   }
 
-  // Очищення всіх зображень
   const clearImages = () => {
     setValue('images', [], { shouldValidate: true })
+    setError('images', { type: 'manual', message: '' })
     if (fileInputRef.current) fileInputRef.current.value = ''
   }
 
-  // Видалення одного зображення за індексом
   const handleRemoveImage = (index: number) => {
     const currentFiles = watch('images') || []
     const updated = [...currentFiles]
-    updated.splice(index, 1) // Видаляємо елемент за індексом
+    updated.splice(index, 1)
     setValue('images', updated, { shouldValidate: true })
+    setError('images', { type: 'manual', message: '' })
   }
 
   return (
     <div
-      className="rounded-lg border border-dashed p-4 text-center outline-secondary-brown-700 focus:outline-2"
+      className="rounded-lg border border-dashed text-center outline-secondary-brown-700 focus:outline-2"
       tabIndex={0}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -63,14 +70,14 @@ const AdsImageUploader: React.FC<AdsImageUploaderProps> = ({ setValue, watch }) 
       }}
     >
       {/* Прев'ю зображень (максимум 5) */}
-      <div className="mb-4 flex flex-wrap justify-start gap-2">
+      <div className="mb-4 flex flex-wrap justify-start gap-5">
         {[...Array(4)].map((_, index) => {
           const image = images[index]
 
           return (
             <div
               key={index}
-              className="group relative flex aspect-[183/127] w-[24%] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-secondary-brown-100 bg-transparent transition-colors duration-300 hover:outline-1 hover:outline-grey-400"
+              className="group relative flex aspect-[183/127] w-[23%] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-secondary-brown-100 transition-colors duration-300 hover:outline-1 hover:outline-grey-400"
               onClick={(e) => {
                 e.stopPropagation()
                 handleClick()
@@ -101,9 +108,9 @@ const AdsImageUploader: React.FC<AdsImageUploaderProps> = ({ setValue, watch }) 
                 <div
                   onDrop={handleDrop}
                   onDragOver={(e) => e.preventDefault()}
-                  className="rounded-lg p-4 text-center"
+                  className="rounded-lg text-center"
                 >
-                  <span className="hidden text-d1 text-grey-500 underline active:text-primary-950 group-hover:inline">
+                  <span className="hidden text-d1 text-secondary-brown-900 underline active:text-primary-950 group-hover:inline">
                     Додати зображення
                   </span>
                   {/* Іконка для плейсхолдера */}

@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import userProfileStore from '../../store/userProfileStore'
 import DefaultAvatar from '../../assets/images/defaultAvatar.svg?react'
-import Button from '../Button/Button'
-import LogoutModal from './LogoutModal'
 import { PATHS } from '../../paths'
+import { Button } from '../../components'
+import LogoutModal from './LogoutModal'
 
 const Menu = () => {
   const user_photo = userProfileStore((state) => state.userInfo.user_photo)
@@ -42,9 +42,11 @@ const Menu = () => {
           <button className="w-full px-4 py-2 transition-colors duration-300 hover:bg-secondary-brown-100">
             Мої оголошення
           </button>
-          <button className="w-full px-4 py-2 transition-colors duration-300 hover:bg-secondary-brown-100">
-            Вподобані
-          </button>
+          <Link to={PATHS.PRODUCTS.favorites}>
+            <button className="w-full px-4 py-2 transition-colors duration-300 hover:bg-secondary-brown-100">
+              Вподобані
+            </button>
+          </Link>
           <div className="mx-4 h-px bg-grey-800"></div>
           <button
             onClick={() => {

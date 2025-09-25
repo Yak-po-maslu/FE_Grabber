@@ -7,7 +7,8 @@ import { PATHS } from '../../paths'
 import useLogin from '../../api/login'
 import { LoginSchema } from '../../features/userValidation'
 import userProfileStore from '../../store/userProfileStore'
-import Button from '../Button/Button'
+import { Button } from '../'
+import CredentialInput from '../EditProfile/CredentialInput'
 
 interface LoginFormProps {}
 
@@ -45,7 +46,7 @@ const LoginForm: React.FC<LoginFormProps> = ({}) => {
           isLoading: false,
         })
         reset()
-        navigate(PATHS.PROFILE.profile)
+        navigate(PATHS.HOME)
       },
       onError: (error) => {
         console.error('Login error:', error)
@@ -55,52 +56,42 @@ const LoginForm: React.FC<LoginFormProps> = ({}) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="auth-register-form">
-      <h1 className="mb-7 text-center text-3xl font-medium">Увійти в акаунт</h1>
       <section className="auth-register-form-section">
-        <label className={`w-full ${errors.email ? 'warning-icon-for-input' : ''}`}>
-          <input
-            type="email"
-            {...register('email')}
-            id="register-email"
-            className={`input-text ${errors.email ? 'border-error-default' : ''}`}
-            placeholder="Електронна пошта"
-          />
-        </label>
+        <CredentialInput
+          name="email"
+          placeholder="Електронна пошта"
+          register={register}
+          error={errors.email}
+          type="email"
+        />
       </section>
       <section className="auth-register-form-section">
-        <label className={`w-full ${errors.password ? 'warning-icon-for-input' : ''}`}>
-          <input
-            type="password"
-            {...register('password')}
-            id="register-password"
-            className={`input-text ${errors.password ? 'border-error-default' : ''}`}
-            placeholder="Пароль"
-          />
-        </label>
+        <CredentialInput
+          name="password"
+          placeholder="Пароль"
+          register={register}
+          error={errors.password}
+          type="password"
+        />
       </section>
+
       <section className="auth-register-form-section">
-        {errors.email && (
-          <p className="error-text ml-5 self-start text-xs">{errors.email.message}</p>
-        )}
-        {errors.password && (
-          <p className="error-text ml-5 self-start text-xs">{errors.password.message}</p>
-        )}
-      </section>
-      <section className="auth-register-form-section">
-        <Link to={PATHS.PASSWORD.forgot} className="mb-6 ml-5 mt-3 self-start underline">
+        <Link to={PATHS.PASSWORD.forgot} className="mb-6 mt-6 self-start underline">
           Забули пароль?
         </Link>
       </section>
+
       {/* Кнопка для відправки форми */}
       <Button
         disabled={status === 'pending'}
         type="submit"
         text="Увійти в акаунт"
-        className="py-2"
+        className="py-2 disabled:bg-secondary-brown-900"
       />
-      <p className="flex justify-center text-b4 text-grey-800">
+
+      <p className="flex justify-between text-b4">
         Немає аккаунту?{' '}
-        <Link to={PATHS.AUTH.register} className="ml-2 text-grey-500 underline">
+        <Link to={PATHS.AUTH.register} className="ml-2 underline">
           Зареєструватися
         </Link>
       </p>

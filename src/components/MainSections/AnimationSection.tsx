@@ -4,7 +4,7 @@ import frameIcon from '../../assets/images/frame355.svg'
 
 const AnimationSection = () => {
   return (
-    <div className="relative m-auto mt-[167px] max-w-container">
+    <div className="relative m-auto mt-16 max-w-container">
       <div className="flex w-full items-center">
         <div className="flex flex-1 justify-evenly gap-2">
           {Array.from({ length: 20 }).map((_, i) => (

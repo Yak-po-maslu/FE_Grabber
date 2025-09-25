@@ -3,11 +3,11 @@ import useBackendRequest from '../hooks/useBackendRequest'
 import { API_ENDPOINTS } from '../paths'
 
 const useAdsCreate = () => {
-  const fetchLogin = useBackendRequest()
+  const adsCreate = useBackendRequest()
 
   return useMutation({
     mutationFn: async (data: FormData) =>
-      await fetchLogin({
+      await adsCreate({
         path: API_ENDPOINTS.ADS.create,
         method: 'POST',
         data,

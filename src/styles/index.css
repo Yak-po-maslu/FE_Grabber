@@ -27,20 +27,31 @@
     &::placeholder {
       @apply text-b4 text-secondary-brown-300;
     }
+
+    /* Приховати нативну іконку ока в Edge */
+    &::-ms-reveal {
+      display: none;
+    }
   }
 
   /* Стилі для форми світлої */
   .input-text-light {
     @apply w-full rounded-[20px] border border-grey-50 px-4 py-2 text-grey-200 focus:outline-none;
+
     &::placeholder {
       @apply text-b4 text-grey-200;
+    }
+
+    /* Приховати нативну іконку ока в Edge */
+    &::-ms-reveal {
+      display: none;
     }
   }
   /* Стилі для всіх карток */
   .card-recommended {
     @apply border border-transparent bg-primary-50 transition duration-300 hover:bg-secondary-brown-100;
-    @apply focus:bg-secondary-brown-100 focus:border focus:border-primary-950;
-    @apply active:bg-secondary-brown-300 active:border-none;
+    @apply focus:border focus:border-primary-950 focus:bg-secondary-brown-100;
+    @apply active:border-none active:bg-secondary-brown-300;
   }
 
   /* Стилі для іконки "!" в інпутах */
@@ -50,12 +61,12 @@
 
   /* Стилі для форми реєстрації користувача */
   .auth-register-form {
-    @apply flex w-full max-w-96 flex-col gap-4 md:w-1/2;
+    @apply flex w-full max-w-96 flex-col gap-4 text-secondary-brown-900 md:w-1/2;
   }
 
   /* Стилі для секції форми реєстрації користувача */
   .auth-register-form-section {
-    @apply relative flex flex-col items-center gap-2 text-grey-500;
+    @apply relative flex flex-col items-center gap-2 text-secondary-brown-900;
   }
 
   /* Стилі для тексту, який з'являється під час виникнення помилки */
@@ -65,28 +76,32 @@
 
   /* Стилі для кнопки базової */
   .button {
-    @apply min-h-[48px] rounded-[30px] bg-primary-950 py-3 px-8 text-primary-50 transition duration-300 hover:bg-secondary-brown-900;
+    @apply min-h-[48px] rounded-[30px] border border-transparent bg-primary-950 px-8 py-3 text-primary-50 outline-none transition duration-300 hover:bg-secondary-brown-900;
 
     &:hover:not(:disabled) {
-      @apply cursor-pointer bg-secondary-brown-900 text-primary-50;
+      @apply cursor-pointer bg-secondary-brown-900;
+    }
+
+    &:focus:not(:disabled),
+    &:focus-visible:not(:disabled) {
+      @apply border border-secondary-brown-50 bg-secondary-brown-900 outline-1 outline-secondary-brown-900;
     }
 
     &:active:not(:disabled) {
-      @apply bg-secondary-brown-950 text-primary-30;
+      @apply border-none bg-secondary-brown-950 outline-none;
     }
 
     &:disabled {
-      @apply cursor-not-allowed bg-secondary-brown-100 text-primary-50;
+      @apply cursor-not-allowed bg-secondary-brown-100;
     }
   }
 
   /* Стилі для кнопок світлих */
   .light-button {
-    @apply min-h-[48px] rounded-[30px] bg-primary-50 py-3 px-8 text-primary-950 hover:bg-secondary-brown-100;
-    @apply focus:bg-secondary-brown-100 focus:border focus:border-primary-950;
-    @apply active:bg-secondary-brown-300 active:border-none;
+    @apply min-h-[48px] rounded-[30px] bg-primary-50 px-8 py-3 text-primary-950 hover:bg-secondary-brown-100;
+    @apply focus:border focus:border-primary-950 focus:bg-secondary-brown-100;
+    @apply active:border-none active:bg-secondary-brown-300;
   }
-
 
   .button-second {
     @apply rounded-[30px] bg-primary-50 px-8 py-2 text-primary-950 transition duration-300 hover:bg-secondary-brown-100 active:bg-secondary-brown-300 disabled:cursor-not-allowed disabled:bg-grey-100 disabled:text-grey-500;
@@ -114,7 +129,6 @@
     @apply mb-8 mt-6 rounded-[30px] bg-primary-950 px-[33.5px] py-[9px] text-b4 text-primary-50 hover:bg-secondary-brown-900 active:bg-primary-950 disabled:bg-secondary-brown-100;
   }
 
-
   /* Стилі для заголовку секції на сторінці додавання товару */
   .title-add-product-section {
     @apply mb-6 text-s1 text-grey-950;
@@ -124,7 +138,6 @@
   .description-add-product-section {
     @apply mb-2 text-b3 text-grey-800;
   }
-
 
   .title-h2 {
     @apply font-kyiv text-h3 text-grey-950;

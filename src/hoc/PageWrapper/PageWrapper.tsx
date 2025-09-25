@@ -11,13 +11,13 @@ const PageWrapper = () => {
   }, [pathname])
 
   return (
-    <>
+    <div className="flex min-h-[100dvh] w-full flex-col justify-between">
       <Header />
-      <section className="content mt-[90px] h-auto min-h-full w-full flex-grow items-center">
+      <section className="mt-[80px] flex-grow">
         <Outlet />
       </section>
       <Footer />
-    </>
+    </div>
   )
 }
 

@@ -6,10 +6,6 @@ export { default as AdDetails } from './AdDetails.tsx'
 
 export { default as AddProduct } from './AddProduct'
 
-export { default as Login } from './Login'
-
-export { default as Register } from './Register'
-
 export { default as ForgotPassword } from './ForgotPassword'
 
 export { default as ResetPassword } from './ResetPassword'
@@ -29,5 +25,9 @@ export { default as ChangeUserEmail } from './ChangeUserEmail'
 export { default as ChangeUserPassword } from './ChangeUserPassword'
 
 export { default as ComingSoon } from './ComingSoon'
+
+export { default as Favorites } from './Favorites.tsx'
+
+export { default as LoginRegister } from './LoginRegister'
 
 export { default as CategoryPage } from './CategoryPage'
