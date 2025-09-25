@@ -2,21 +2,35 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { PATHS } from '../../../paths.ts'
 import CategoryCard from '../CategoryCard/CategoryCard.tsx'
-import useFetchCategories from '../../../api/useFetchCategories.ts'
 import CategoryLoader from '../CategoryLoader/CategoryLoader.tsx'
+import useFetchSubcategories from '../../../api/useFetchSubcategories.ts'
+import { TCategory } from '../../../types/categoryTypes.ts'
 
-interface CategoriesSectionProps {}
+interface CategoriesSectionProps {
+  categoryId: number | undefined
+}
 
-const CategoriesSection: React.FC<CategoriesSectionProps> = ({}) => {
-  const { data: categories, error, status } = useFetchCategories()
+const CategoriesSection: React.FC<CategoriesSectionProps> = ({ categoryId }) => {
+  const [filterSubcategories, setFilterSubcategories] = React.useState<TCategory[] | null>(null)
+
+  const { data: subcategories, error, status } = useFetchSubcategories()
+
+  React.useEffect(() => {
+    if (subcategories && categoryId) {
+      const foundSubcategories = subcategories.filter((cat) => cat.category === categoryId)
+      if (foundSubcategories.length > 0) {
+        console.log(categoryId, foundSubcategories)
+        setFilterSubcategories(foundSubcategories)
+      } else {
+        setFilterSubcategories(null)
+      }
+    }
+  }, [subcategories, categoryId])
 
   return (
     <>
       {/* Основний контейнер секції категорій */}
       <section className="mx-auto max-w-container pb-[64px]">
-        {/* Заголовок секції */}
-        <h1 className="my-16 text-wrap text-center font-kyiv text-h1">Категорії</h1>
-
         {/* Сітка для відображення категорій */}
         <div className="grid grid-cols-[repeat(auto-fill,minmax(285px,1fr))] gap-5">
           {/* Показати лоадер під час завантаження категорій */}
@@ -30,7 +44,7 @@ const CategoriesSection: React.FC<CategoriesSectionProps> = ({}) => {
           )}
 
           {/* Відобразити повідомлення, якщо категорій немає */}
-          {status === 'success' && categories && categories.length === 0 && (
+          {status === 'success' && filterSubcategories && filterSubcategories.length === 0 && (
             <div className="col-span-full text-center text-grey-500">
               Наразі немає доступних категорій
             </div>
@@ -38,17 +52,16 @@ const CategoriesSection: React.FC<CategoriesSectionProps> = ({}) => {
 
           {/* Відобразити список категорій, якщо вони є */}
           {status === 'success' &&
-            categories &&
-            categories.length > 0 &&
-            categories.map((category) => (
+            filterSubcategories &&
+            filterSubcategories.map((subCategory) => (
               // Кожна категорія є посиланням на сторінку категорії
               <Link
-                to={`${PATHS.PRODUCTS.category}${category.name}`}
+                to={`${PATHS.PRODUCTS.category}${subCategory.name}`}
                 className="no-underline"
-                key={category.id}
+                key={subCategory.id}
               >
                 {/* Карточка категорії */}
-                <CategoryCard {...category} />
+                <CategoryCard {...subCategory} />
               </Link>
             ))}
         </div>

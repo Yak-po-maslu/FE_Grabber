@@ -45,6 +45,8 @@ export const API_ENDPOINTS = {
     recommendations: 'listings/recommendations/',
     rating: 'listings/products/{id}/reviews',
     comments: '/listings/products/{id}/comments/',
+    filtersAndSort: 'listings/categories/{category_id}/filters/',
+    subcategories: 'listings/subcategories/',
   },
   AUTH: {
     login: 'user/login/',

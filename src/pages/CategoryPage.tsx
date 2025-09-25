@@ -3,6 +3,8 @@ import { Link, useLocation } from 'react-router-dom'
 import { PATHS } from '../paths'
 import OrnamentImgFill from '../assets/images/ornament_category_page_filled.svg?react'
 import OrnamentImgTransparent from '../assets/images/ornament_category_page_transparent.svg?react'
+import { CategoriesSection } from '../components'
+import useFetchCategories from '../api/useFetchCategories'
 
 interface CategoryPageProps {}
 
@@ -14,6 +16,8 @@ const CategoryPage: React.FC<CategoryPageProps> = ({}) => {
 
   // Декодуємо з URL-формату
   const categoryPage = decodeURIComponent(rawCategory)
+
+  const { data: categories } = useFetchCategories()
 
   return (
     <div className="mx-auto flex max-w-container flex-col justify-center pt-8 align-middle">
@@ -41,7 +45,13 @@ const CategoryPage: React.FC<CategoryPageProps> = ({}) => {
 
       <section className="mt-16">
         <h2 className="text-h31">Обирайте за підкатегорією</h2>
-        <section className="mt-8"></section>
+        <section className="mt-8">
+          {categoryPage && categories && (
+            <CategoriesSection
+              categoryId={categories.find((cat) => cat.name === categoryPage)?.id}
+            />
+          )}
+        </section>
       </section>
     </div>
   )
