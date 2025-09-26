@@ -39,7 +39,11 @@ export const routes = [
         element: <Products />,
       },
       {
-        path: `${PATHS.PRODUCTS.category}:category`,
+        path: `${PATHS.PRODUCTS.category}`,
+        element: <CategoryPage />,
+      },
+      {
+        path: `${PATHS.PRODUCTS.subcategory}`,
         element: <CategoryPage />,
       },
       {

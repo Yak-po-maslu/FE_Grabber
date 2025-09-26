@@ -15,7 +15,7 @@ const CategoriesMenu = () => {
                 <li className="rounded-t-[20px] p-3 hover:bg-secondary-brown-100">Всі категорії</li>
               </Link>
               {data?.map((item, index) => (
-                <Link key={index} to={`${PATHS.PRODUCTS.category}${item.name}`}>
+                <Link key={index} to={`${PATHS.PRODUCTS.category.replace(':category', item.name)}`}>
                   <li
                     className={`p-3 hover:bg-secondary-brown-100 ${index === data.length - 1 && 'rounded-b-[20px]'}`}
                   >
