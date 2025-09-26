@@ -20,7 +20,6 @@ const CategoriesSection: React.FC<CategoriesSectionProps> = ({ categoryId, categ
     if (subcategories && categoryId) {
       const foundSubcategories = subcategories.filter((cat) => cat.category === categoryId)
       if (foundSubcategories.length > 0) {
-        console.log(categoryId, foundSubcategories)
         setFilterSubcategories(foundSubcategories)
       } else {
         setFilterSubcategories(null)
