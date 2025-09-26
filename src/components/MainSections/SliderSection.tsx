@@ -11,7 +11,11 @@ import { PATHS } from '../../paths.ts'
 import { useState } from 'react'
 import SwiperCore from 'swiper'
 
-const SliderSection = () => {
+type SliderSectionProps = {
+  styles?: string
+}
+
+const SliderSection = ({ styles = '' }: SliderSectionProps) => {
   const [isBeginning, setIsBeginning] = useState(true)
   const [isEnd, setIsEnd] = useState(false)
 
@@ -21,7 +25,7 @@ const SliderSection = () => {
   }
 
   return (
-    <div className="relative mx-auto my-[96px] max-w-container">
+    <div className={`relative mx-auto max-w-container ${styles}`}>
       <button
         className={`swiper-button-prev group absolute left-[-40px] top-1/2 z-10 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full text-secondary-brown-100 transition-colors hover:text-secondary-brown-100 active:text-primary-950${
           isBeginning ? 'pointer-events-none opacity-0' : ''

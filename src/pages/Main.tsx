@@ -7,9 +7,14 @@ const Main = () => {
   return (
     <div>
       <AnimationSection />
-      <SliderSection />
+      <SliderSection styles="my-[96px]" />
       <PopularSection />
-      <RecommendedSection slideView={2} text="Вам може сподобатися" variant="home" />
+      <RecommendedSection
+        slideView={2}
+        text="Вам може сподобатися"
+        variant="home"
+        styles="mb-[96px]"
+      />
       <BuySellSection />
       <div className="my-[96px] text-center">
         <p className="mb-6 text-h31">Є питання? У нас є відповіді!</p>
