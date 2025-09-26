@@ -8,9 +8,10 @@ import { TCategory } from '../../../types/categoryTypes.ts'
 
 interface CategoriesSectionProps {
   categoryId: number | undefined
+  categoryName: string
 }
 
-const CategoriesSection: React.FC<CategoriesSectionProps> = ({ categoryId }) => {
+const CategoriesSection: React.FC<CategoriesSectionProps> = ({ categoryId, categoryName }) => {
   const [filterSubcategories, setFilterSubcategories] = React.useState<TCategory[] | null>(null)
 
   const { data: subcategories, error, status } = useFetchSubcategories()
@@ -56,7 +57,7 @@ const CategoriesSection: React.FC<CategoriesSectionProps> = ({ categoryId }) => 
             filterSubcategories.map((subCategory) => (
               // Кожна категорія є посиланням на сторінку категорії
               <Link
-                to={`${PATHS.PRODUCTS.category}${subCategory.name}`}
+                to={`${PATHS.PRODUCTS.subcategory.replace(':category', categoryName).replace(':subcategory', subCategory.name)}`}
                 className="no-underline"
                 key={subCategory.id}
               >

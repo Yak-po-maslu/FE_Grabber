@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useParams } from 'react-router-dom'
 import { PATHS } from '../paths'
 import OrnamentImgFill from '../assets/images/ornament_category_page_filled.svg?react'
 import OrnamentImgTransparent from '../assets/images/ornament_category_page_transparent.svg?react'
@@ -9,13 +9,9 @@ import useFetchCategories from '../api/useFetchCategories'
 interface CategoryPageProps {}
 
 const CategoryPage: React.FC<CategoryPageProps> = ({}) => {
-  const url = useLocation().pathname
+  const rawCategory = useParams().category
 
-  // Витягуємо частину після 'category/'
-  const rawCategory = url.split('category/')[1]
-
-  // Декодуємо з URL-формату
-  const categoryPage = decodeURIComponent(rawCategory)
+  const categoryPage = decodeURIComponent(rawCategory ?? '')
 
   const { data: categories } = useFetchCategories()
 
@@ -49,6 +45,7 @@ const CategoryPage: React.FC<CategoryPageProps> = ({}) => {
           {categoryPage && categories && (
             <CategoriesSection
               categoryId={categories.find((cat) => cat.name === categoryPage)?.id}
+              categoryName={categoryPage}
             />
           )}
         </section>
