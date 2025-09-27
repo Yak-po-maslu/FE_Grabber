@@ -19,6 +19,7 @@ const CategoriesSection: React.FC<CategoriesSectionProps> = ({ categoryId, categ
   React.useEffect(() => {
     if (subcategories && categoryId) {
       const foundSubcategories = subcategories.filter((cat) => cat.category === categoryId)
+
       if (foundSubcategories.length > 0) {
         setFilterSubcategories(foundSubcategories)
       } else {

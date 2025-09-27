@@ -1,9 +1,9 @@
 import React from 'react'
-import { Link, useLocation, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { PATHS } from '../paths'
 import OrnamentImgFill from '../assets/images/ornament_category_page_filled.svg?react'
 import OrnamentImgTransparent from '../assets/images/ornament_category_page_transparent.svg?react'
-import { CategoriesSection, RecommendedSection, SliderSection } from '../components'
+import { CategoriesSection, SearchPanel, RecommendedSection, SliderSection } from '../components'
 import useFetchCategories from '../api/useFetchCategories'
 
 interface CategoryPageProps {}
@@ -14,6 +14,9 @@ const CategoryPage: React.FC<CategoryPageProps> = ({}) => {
   const categoryPage = decodeURIComponent(rawCategory ?? '')
 
   const { data: categories } = useFetchCategories()
+
+  const categoryId =
+    categoryPage && categories && categories.find((cat) => cat.name === categoryPage)?.id
 
   return (
     <div className="mx-auto flex max-w-container flex-col justify-center gap-16 pb-24 pt-8 align-middle">
@@ -42,18 +45,16 @@ const CategoryPage: React.FC<CategoryPageProps> = ({}) => {
       <section>
         <h2 className="text-h31">Обирайте за підкатегорією</h2>
         <section className="mt-8">
-          {categoryPage && categories && (
-            <CategoriesSection
-              categoryId={categories.find((cat) => cat.name === categoryPage)?.id}
-              categoryName={categoryPage}
-            />
-          )}
+          {categoryId && <CategoriesSection categoryId={categoryId} categoryName={categoryPage} />}
         </section>
       </section>
 
       <RecommendedSection slideView={2} text="Вам може сподобатися" variant="home" />
 
-      <SliderSection />
+      <section>
+        <SliderSection />
+      </section>
+      <section>{categoryId && <SearchPanel />}</section>
     </div>
   )
 }

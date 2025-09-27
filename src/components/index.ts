@@ -77,3 +77,7 @@ export { default as AnimationSection } from './MainSections/AnimationSection'
 export { default as SliderSection } from './MainSections/SliderSection'
 
 export { default as PopularSection } from './MainSections/PopularSection'
+
+export { default as SearchPanel } from './SearchPanel/SearchPanel.tsx'
+
+export { default as SearchRegionInput } from './SearchPanel/SearchRegionInput.tsx'
