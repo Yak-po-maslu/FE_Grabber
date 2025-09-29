@@ -51,7 +51,7 @@ const ForgotPasswordForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="auth-register-form md-[] my-[220px] w-full max-w-[400px]"
+      className="auth-register-form md-[160px] my-[220px] w-full max-w-[400px] bg-secondary-brown-50"
     >
       <div className="flex flex-col">
         <h2 className="pb-4 text-center text-h3 text-grey-950">Забули пароль?</h2>
@@ -66,7 +66,7 @@ const ForgotPasswordForm = () => {
             placeholder="Введіть ваш e-mail"
             type="email"
             error={errors.email}
-            className="input-text"
+            className="input-text bg-transparent"
           />
           <Button
             text="Відправити"

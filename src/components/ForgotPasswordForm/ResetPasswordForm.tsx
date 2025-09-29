@@ -60,7 +60,7 @@ const ResetPasswordForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="auth-register-form mb-[280px] mt-[220px] w-full max-w-[400px]"
+      className="auth-register-form mb-[280px] mt-[220px] w-full max-w-[400px] bg-secondary-brown-50"
     >
       <div className="relative flex flex-col">
         <h2 className="pb-8 text-center text-h3 text-grey-950">Відновлення паролю</h2>
@@ -71,7 +71,7 @@ const ResetPasswordForm = () => {
             placeholder="Введіть новий пароль"
             type="password"
             error={errors.password}
-            className="input-text"
+            className="input-text bg-transparent"
           />
           <CredentialInput
             register={register}
@@ -79,7 +79,7 @@ const ResetPasswordForm = () => {
             placeholder="Повторно введіть новий пароль"
             type="password"
             error={errors.confirm_password}
-            className="input-text"
+            className="input-text bg-transparent"
           />
         </div>
         <Button
