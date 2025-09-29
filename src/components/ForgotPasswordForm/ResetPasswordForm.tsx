@@ -60,7 +60,7 @@ const ResetPasswordForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="auth-register-form mt-[160px] w-full max-w-[400px]"
+      className="auth-register-form mb-[280px] mt-[220px] w-full max-w-[400px]"
     >
       <div className="relative flex flex-col">
         <h2 className="pb-8 text-center text-h3 text-grey-950">Відновлення паролю</h2>

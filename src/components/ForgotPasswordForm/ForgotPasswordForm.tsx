@@ -51,7 +51,7 @@ const ForgotPasswordForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="auth-register-form mt-[160px] w-full max-w-[400px]"
+      className="auth-register-form md-[] my-[220px] w-full max-w-[400px]"
     >
       <div className="flex flex-col">
         <h2 className="pb-4 text-center text-h3 text-grey-950">Забули пароль?</h2>
