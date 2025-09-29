@@ -2,9 +2,10 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { z } from 'zod'
+import { toast } from 'react-hot-toast'
 import useSubscribeToNewsletter from '../../api/useSubscribeToNewsletter'
 import { subscribeSchema } from '../../features/userValidation'
-import { Button, Input, SuccessModal } from '../../components'
+import { Input, SuccessModal } from '../../components'
 
 const NewsCard = () => {
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false)
@@ -28,8 +29,9 @@ const NewsCard = () => {
         reset()
         setIsSuccessModalOpen(true)
       },
-      onError: (err) => {
-        console.error('Помилка при підписці:', err)
+      onError: (error) => {
+        toast.error('Ви вже підписані')
+        console.error('Помилка при підписці:', error)
       },
     })
   }
@@ -62,12 +64,9 @@ const NewsCard = () => {
             error={errors.email}
           />
           <div>
-            <Button
-              type="submit"
-              text="Підписатися"
-              className="light-button text-grey-950"
-              disabled={isSubmitting}
-            />
+            <button type="submit" className="light-button min-w-btn-medium" disabled={isSubmitting}>
+              Підписатися
+            </button>
           </div>
         </form>
       </div>

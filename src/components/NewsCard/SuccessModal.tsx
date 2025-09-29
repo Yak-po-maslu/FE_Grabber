@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import ConfettiImg from '../../assets/images/Confetti.svg?react'
 import Subscribed from '../../assets/images/subscribed.svg?react'
 
@@ -6,9 +7,26 @@ type Props = {
 }
 
 const SuccessModal = ({ onClose }: Props) => {
+  const [isVisible, setIsVisible] = useState(true)
+
+  const handleClose = () => {
+    setIsVisible(false)
+    setTimeout(() => onClose(), 300)
+  }
+
+  useEffect(() => {
+    const timer = setTimeout(handleClose, 3000)
+
+    return () => clearTimeout(timer)
+  }, [])
+
   return (
-    <div className="relative w-full overflow-hidden rounded-xl bg-white p-10 shadow-lg">
-      <button className="close-button absolute right-6 top-4" onClick={onClose}></button>
+    <div
+      className={`relative w-full overflow-hidden rounded-xl bg-white p-10 shadow-lg transition-all duration-300 ease-in-out ${
+        isVisible ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
+      }`}
+    >
+      <button className="close-button absolute right-6 top-4" onClick={handleClose}></button>
       <ConfettiImg
         aria-label="Confetti"
         className="pointer-events-none absolute inset-0 z-0 h-full w-full object-contain opacity-85"
