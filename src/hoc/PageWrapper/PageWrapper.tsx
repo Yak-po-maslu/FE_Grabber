@@ -13,7 +13,7 @@ const PageWrapper = () => {
   return (
     <div className="flex min-h-[100dvh] w-full flex-col justify-between">
       <Header />
-      <section className="mt-[80px] flex-grow">
+      <section className="mt-[80px] flex-grow bg-secondary-brown-50">
         <Outlet />
       </section>
       <Footer />

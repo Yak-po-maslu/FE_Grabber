@@ -73,7 +73,10 @@ const UploadAvatar = ({ uploadedPhoto, onChange, error, userPhoto }: UploadAvata
         {error && <div className="text-error-default">{error}</div>}
       </div>
       <div className="flex flex-col">
-        <Button className="custom-button w-[221px]" onClick={() => inputRef.current?.click()}>
+        <Button
+          className="custom-button w-[221px] whitespace-nowrap"
+          onClick={() => inputRef.current?.click()}
+        >
           Завантажити фото
         </Button>
       </div>
