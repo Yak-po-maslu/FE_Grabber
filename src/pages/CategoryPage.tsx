@@ -3,7 +3,13 @@ import { Link, useParams } from 'react-router-dom'
 import { PATHS } from '../paths'
 import OrnamentImgFill from '../assets/images/ornament_category_page_filled.svg?react'
 import OrnamentImgTransparent from '../assets/images/ornament_category_page_transparent.svg?react'
-import { CategoriesSection, SearchPanel, RecommendedSection, SliderSection } from '../components'
+import {
+  CategoriesSection,
+  SearchPanel,
+  RecommendedSection,
+  SliderSection,
+  FiltersPanel,
+} from '../components'
 import useFetchCategories from '../api/useFetchCategories'
 
 interface CategoryPageProps {}
@@ -54,7 +60,10 @@ const CategoryPage: React.FC<CategoryPageProps> = ({}) => {
       <section>
         <SliderSection />
       </section>
+
       <section>{categoryId && <SearchPanel />}</section>
+
+      <section>{!!categoryId && <FiltersPanel categoryId={categoryId.toString()} />}</section>
     </div>
   )
 }

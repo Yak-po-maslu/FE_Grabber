@@ -81,3 +81,7 @@ export { default as PopularSection } from './MainSections/PopularSection'
 export { default as SearchPanel } from './SearchPanel/SearchPanel.tsx'
 
 export { default as SearchRegionInput } from './SearchPanel/SearchRegionInput.tsx'
+
+export { default as FiltersPanel } from './FiltersPanel/FiltersPanel.tsx'
+
+export { default as Select } from './FiltersPanel/Select.tsx'
