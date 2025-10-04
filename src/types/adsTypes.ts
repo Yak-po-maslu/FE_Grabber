@@ -1,16 +1,49 @@
-export type TAdsCreate = {
-  id?: string
-  product_id: string
+// Базовий тип для оголошення
+type TBaseAd = {
   title: string
   description: string
+  images: string[]
   price: string
-  status?: 'draft' | 'pending'
-  category: string
   location: string
+  is_favorite: boolean
+}
+
+// Контактна інформація
+type TContactInfo = {
   contact_name: string
-  user_id?: number
   email: string
   phone: string
-  images: string[]
-  is_favorite: boolean
+}
+
+// Повна інформація про лістинг
+export type TListingCreate = TBaseAd &
+  TContactInfo & {
+    id?: string
+    product_id: string
+    category: string
+    status?: 'draft' | 'pending'
+    user_id?: number
+  }
+
+export type TListingGet = TBaseAd &
+  TContactInfo & {
+    id: number
+    product_id?: string
+    category: string
+    category_id: number
+    status: string
+    user_id: number
+    created_at: string
+    view_count: number
+  }
+
+// Спрощений тип для картки оголошення
+export type AdType = TBaseAd & {
+  id: string
+}
+
+// Тип для улюблених
+export type TFavorite = {
+  product_id: string
+  favorite: boolean
 }

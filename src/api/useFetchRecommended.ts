@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import useBackendRequest from '../hooks/useBackendRequest'
-import { AdType } from '../types/productTypes'
 import { API_ENDPOINTS } from '../paths'
+import { AdType } from '../types/adsTypes'
 
 const useFetchRecommended = () => {
   const fetchAds = useBackendRequest()
