@@ -1,14 +1,14 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import useBackendRequest from '../hooks/useBackendRequest'
 import { API_ENDPOINTS } from '../paths'
-import { TFavorite } from '../types/adsTypes'
+import { TFavoriteListing } from '../types/adsTypes'
 
 const useToggleFavorite = () => {
   const fetchUserData = useBackendRequest()
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: async ({ product_id, favorite }: TFavorite) => {
+    mutationFn: async ({ product_id, favorite }: TFavoriteListing) => {
       if (favorite) {
         return fetchUserData({
           method: 'POST',

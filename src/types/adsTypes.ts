@@ -1,5 +1,5 @@
 // Базовий тип для оголошення
-type TBaseAd = {
+type TBaseListing = {
   title: string
   description: string
   images: string[]
@@ -16,7 +16,7 @@ type TContactInfo = {
 }
 
 // Повна інформація про лістинг
-export type TListingCreate = TBaseAd &
+export type TListingCreate = TBaseListing &
   TContactInfo & {
     id?: string
     product_id: string
@@ -25,7 +25,7 @@ export type TListingCreate = TBaseAd &
     user_id?: number
   }
 
-export type TListingGet = TBaseAd &
+export type TListingGet = TBaseListing &
   TContactInfo & {
     id: number
     product_id?: string
@@ -38,12 +38,12 @@ export type TListingGet = TBaseAd &
   }
 
 // Спрощений тип для картки оголошення
-export type AdType = TBaseAd & {
+export type TListing = TBaseListing & {
   id: string
 }
 
 // Тип для улюблених
-export type TFavorite = {
+export type TFavoriteListing = {
   product_id: string
   favorite: boolean
 }
