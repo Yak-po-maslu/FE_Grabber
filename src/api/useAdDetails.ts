@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import useBackendRequest from '../hooks/useBackendRequest'
-import { TListingCreate } from '../types/adsTypes.ts'
+import { TListingCreate } from '../types/listingsTypes.ts'
 import { API_ENDPOINTS } from '../paths'
 
 const useAdDetails = (adId: string) => {

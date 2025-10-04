@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import useBackendRequest from '../hooks/useBackendRequest'
 import { API_ENDPOINTS } from '../paths'
-import { TFavoriteListing } from '../types/adsTypes'
+import { TFavoriteListing } from '../types/listingsTypes'
 
 const useToggleFavorite = () => {
   const fetchUserData = useBackendRequest()

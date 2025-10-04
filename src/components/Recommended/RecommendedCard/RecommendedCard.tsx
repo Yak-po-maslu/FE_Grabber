@@ -4,10 +4,10 @@ import LocationIcon from '../../../assets/icons/location-icon.svg?react'
 import defaultAvatar from '../../../assets/images/defaultAvatar.svg'
 import { FavoriteIcon } from '../../../components'
 import { PATHS } from '../../../paths'
-import { TListing } from '../../../types/adsTypes'
+import { TListingGet } from '../../../types/listingsTypes'
 
 type Props = {
-  ad: TListing
+  ad: TListingGet
   cardClassName?: string
 }
 

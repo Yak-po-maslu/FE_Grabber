@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import useBackendRequest, { TQueryParams } from '../hooks/useBackendRequest'
 import { API_ENDPOINTS } from '../paths'
-import { TListingGet } from '../types/adsTypes'
+import { TListingGet } from '../types/listingsTypes'
 
 const useFetchListings = (queryParams?: TQueryParams) => {
   const fetchListings = useBackendRequest()
@@ -9,7 +9,7 @@ const useFetchListings = (queryParams?: TQueryParams) => {
   return useQuery({
     queryKey: ['listings', JSON.stringify(queryParams)],
     queryFn: () =>
-      fetchListings<TListingGet>({
+      fetchListings<TListingGet[]>({
         path: API_ENDPOINTS.ADS.listings,
         queryParams,
       }),
