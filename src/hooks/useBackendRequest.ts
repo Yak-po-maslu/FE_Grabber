@@ -4,11 +4,14 @@ import { ApiError } from '../types/types'
 
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH'
 
+export type TQueryParams = Record<string, string | number | boolean>
+
 type Params<Data> = {
   path: string
   method?: HttpMethod
   data?: Data
   contentType?: string
+  queryParams?: TQueryParams
 }
 
 const backendURL = import.meta.env.VITE_API_URL
@@ -24,6 +27,7 @@ const useBackendRequest = () => {
     method = 'GET',
     data,
     contentType = 'application/json',
+    queryParams,
   }: Params<Data>): Promise<Response> => {
     const config: AxiosRequestConfig<Data> = {
       url: path,
@@ -32,6 +36,7 @@ const useBackendRequest = () => {
       headers: {
         'Content-Type': contentType,
       },
+      params: queryParams,
     }
 
     try {
