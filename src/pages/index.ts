@@ -4,7 +4,7 @@ export { default as Products } from './Products'
 
 export { default as AdDetails } from './AdDetails.tsx'
 
-export { default as AddProduct } from './AddProduct'
+export { default as AddListing } from './AddListing.tsx'
 
 export { default as ForgotPassword } from './ForgotPassword'
 

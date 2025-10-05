@@ -1,17 +1,21 @@
 import React, { useRef } from 'react'
 import { UseFormSetValue, UseFormWatch, UseFormSetError } from 'react-hook-form'
-import { TFormData } from '../../pages/AddProduct'
+import { TFormData } from '../../pages/AddListing'
 import IconPlaseholder from '../../assets/icons/photo-icon.svg?react'
 import { validateImage } from '../../utils/validateImageFile'
 
 // Описуємо пропси для компонента
-interface AdsImageUploaderProps {
+interface ListingImageUploaderProps {
   setValue: UseFormSetValue<TFormData>
   watch: UseFormWatch<TFormData>
   setError: UseFormSetError<TFormData>
 }
 
-const AdsImageUploader: React.FC<AdsImageUploaderProps> = ({ setValue, watch, setError }) => {
+const ListingImageUploader: React.FC<ListingImageUploaderProps> = ({
+  setValue,
+  watch,
+  setError,
+}) => {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const images = watch('images')
 
@@ -148,4 +152,4 @@ const AdsImageUploader: React.FC<AdsImageUploaderProps> = ({ setValue, watch, se
   )
 }
 
-export default AdsImageUploader
+export default ListingImageUploader

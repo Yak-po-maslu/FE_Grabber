@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
-import { addAdsSchema } from '../features/adsValidation'
+import { addListingSchema } from '../features/listingsValidation'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { AdsImageUploader, Button } from '../components'
+import { ListingImageUploader, Button } from '../components'
 import { z } from 'zod'
 import toast, { Toaster } from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
@@ -9,7 +9,7 @@ import useFetchCategories from '../api/useFetchCategories'
 import { capitalizeFirstLetter } from '../utils/capitalizeFirstLetter'
 import useAdsCreate from '../api/adsCreate'
 
-export type TFormData = z.infer<typeof addAdsSchema>
+export type TFormData = z.infer<typeof addListingSchema>
 
 const defaultValues: TFormData = {
   title: '',
@@ -23,7 +23,7 @@ const defaultValues: TFormData = {
   location: '',
 }
 
-const AddProduct = () => {
+const AddListing = () => {
   const {
     register,
     handleSubmit,
@@ -34,7 +34,7 @@ const AddProduct = () => {
     formState: { errors },
   } = useForm<TFormData>({
     defaultValues,
-    resolver: zodResolver(addAdsSchema),
+    resolver: zodResolver(addListingSchema),
     mode: 'onChange',
   })
 
@@ -216,7 +216,7 @@ const AddProduct = () => {
           <p className="description-add-product-section">
             Перетягніть файли або натисніть для завантаження
           </p>
-          <AdsImageUploader setValue={setValue} watch={watch} setError={setError} />
+          <ListingImageUploader setValue={setValue} watch={watch} setError={setError} />
           {errors.images && <p className="error-text">{errors.images.message}</p>}
         </section>
 
@@ -319,4 +319,4 @@ const AddProduct = () => {
   )
 }
 
-export default AddProduct
+export default AddListing
