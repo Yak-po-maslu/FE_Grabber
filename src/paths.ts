@@ -4,7 +4,8 @@ export const PATHS = {
     list: '/products',
     details: '/ad/:ad_id',
     add: '/add-product',
-    category: '/products/category/',
+    category: '/products/:category/',
+    subcategory: '/products/:category/:subcategory',
     favorites: '/favorites',
   },
   CART: '/cart',
@@ -45,6 +46,8 @@ export const API_ENDPOINTS = {
     recommendations: 'listings/recommendations/',
     rating: 'listings/products/{id}/reviews',
     comments: '/listings/products/{id}/comments/',
+    filtersAndSort: 'listings/categories/{category_id}/filters/',
+    subcategories: 'listings/subcategories/',
   },
   AUTH: {
     login: 'user/login/',

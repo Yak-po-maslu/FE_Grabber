@@ -14,6 +14,7 @@ export const addListingSchema = z.object({
     .max(1000, 'Опис має містити не більше 1000 символів')
     .min(40, 'Опис має містити не менше 40 символів'),
   category_name: z.string().nonempty('Категорія є обовʼязковою'),
+  subcategory_name: z.string().nonempty('Підкатегорія є обовʼязковою'),
   images: z
     .array(
       z
