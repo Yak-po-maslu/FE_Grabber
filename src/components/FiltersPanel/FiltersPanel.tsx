@@ -15,7 +15,7 @@ const FiltersPanel: React.FC<FiltersPanelProps> = ({ categoryId }) => {
   const { data, isSuccess } = useFetchFiltersAndSort(categoryId)
 
   return (
-    <div className="mb-9 border-b border-secondary-brown-300 pb-9">
+    <div>
       <div className="flex items-center gap-2">
         <FilterIcon className="text-primary-950" />
         <h2 className="text-b2">Всі фільтри</h2>

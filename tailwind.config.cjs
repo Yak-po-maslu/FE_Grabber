@@ -16,6 +16,7 @@ module.exports = {
         h31: ['32px', { lineHeight: '130%', fontWeight: '600' }],
         h3: ['32px', { lineHeight: '130%', fontWeight: '400' }],
         h4: ['24px', { lineHeight: '130%', fontWeight: '400' }],
+        h41: ['24px', { lineHeight: '150%', fontWeight: '600' }],
         s1: ['24px', { lineHeight: '140%', fontWeight: '500' }],
         b1: ['32px', { lineHeight: '150%', fontWeight: '400' }],
         b2: ['24px', { lineHeight: '150%', fontWeight: '400' }],

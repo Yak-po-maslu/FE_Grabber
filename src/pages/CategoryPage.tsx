@@ -69,7 +69,16 @@ const CategoryPage: React.FC<CategoryPageProps> = ({}) => {
 
       <section>{!!categoryId && <FiltersPanel categoryId={categoryId.toString()} />}</section>
 
-      <section>{isSuccess && <Listings listings={listings} />}</section>
+      <div className="border-b border-secondary-brown-300"></div>
+
+      <section>
+        {isSuccess && (
+          <>
+            <p className="text-h41 mb-16 text-grey-950">Знайдено {listings.length} оголошень</p>
+            {<Listings listings={listings} />}
+          </>
+        )}
+      </section>
     </div>
   )
 }
