@@ -25,7 +25,7 @@ const RecommendedCard = ({ ad, cardClassName = '' }: Props) => {
             className="h-[250px] w-full rounded-[15px] object-cover"
           />
           <div className="absolute right-2 top-2 z-10">
-            <FavoriteIcon product_id={ad.id} />
+            <FavoriteIcon product_id={ad.id.toString()} />
           </div>
         </div>
 

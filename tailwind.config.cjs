@@ -98,6 +98,13 @@ module.exports = {
         'warning-icon': "url('./src/assets/icons/exclamation-icon.svg')",
         'bg-news': "url('/src/assets/images/BG.jpg')",
       },
+      gridTemplateColumns: {
+        'auto-fill-100': 'repeat(auto-fill, minmax(100px, 1fr))',
+        'auto-fill-200': 'repeat(auto-fill, minmax(200px, 1fr))',
+        'auto-fill-300': 'repeat(auto-fill, minmax(300px, 1fr))',
+        'auto-fill-385': 'repeat(auto-fill, minmax(385px, 1fr))',
+        'auto-fill-400': 'repeat(auto-fill, minmax(400px, 1fr))',
+      },
     },
     keyframes: {
       slide1: {

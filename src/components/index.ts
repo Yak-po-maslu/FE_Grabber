@@ -85,3 +85,5 @@ export { default as SearchRegionInput } from './SearchPanel/SearchRegionInput.ts
 export { default as FiltersPanel } from './FiltersPanel/FiltersPanel.tsx'
 
 export { default as Select } from './FiltersPanel/Select.tsx'
+
+export { default as ListingCard } from './ListingCard/ListingCard.tsx'

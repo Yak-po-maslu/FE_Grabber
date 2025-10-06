@@ -11,6 +11,8 @@ import {
   FiltersPanel,
 } from '../components'
 import useFetchCategories from '../api/useFetchCategories'
+import Listings from '../components/Listings/Listings'
+import useFetchListings from '../api/useFetchListings'
 
 interface CategoryPageProps {}
 
@@ -23,6 +25,8 @@ const CategoryPage: React.FC<CategoryPageProps> = ({}) => {
 
   const categoryId =
     categoryPage && categories && categories.find((cat) => cat.name === categoryPage)?.id
+
+  const { data: listings, isSuccess } = useFetchListings()
 
   return (
     <div className="mx-auto flex max-w-container flex-col justify-center gap-16 pb-24 pt-8 align-middle">
@@ -64,6 +68,8 @@ const CategoryPage: React.FC<CategoryPageProps> = ({}) => {
       <section>{categoryId && <SearchPanel />}</section>
 
       <section>{!!categoryId && <FiltersPanel categoryId={categoryId.toString()} />}</section>
+
+      <section>{isSuccess && <Listings listings={listings} />}</section>
     </div>
   )
 }

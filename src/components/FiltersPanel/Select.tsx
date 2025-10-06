@@ -45,7 +45,7 @@ const Select: React.FC<SelectProps> = ({
     if (currentValue !== query) {
       setQuery(currentValue || '')
     }
-  }, [currentValue]) // автоматичне оновлення при reset або зовнішній зміні
+  }, [currentValue, query]) // автоматичне оновлення при reset або зовнішній зміні
 
   return (
     <div className="flex flex-col justify-start gap-2">

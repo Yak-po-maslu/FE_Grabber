@@ -197,4 +197,79 @@
   .sliderButton.swiper-button-disabled {
     @apply pointer-events-none cursor-not-allowed opacity-50;
   }
+
+  .listing-card {
+    @apply z-0 gap-0 border-none bg-primary-50 p-6 outline outline-transparent transition duration-300 hover:bg-secondary-brown-100;
+    @apply focus:bg-secondary-brown-100 focus:outline focus:outline-secondary-brown-900 focus-visible:bg-secondary-brown-100 focus-visible:outline focus-visible:outline-secondary-brown-900;
+    @apply active:bg-secondary-brown-300 active:outline-none;
+
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 5;
+    grid-template-columns: 1fr minmax(2rem, 3rem);
+
+    .image {
+      @apply block aspect-[338/250] h-full w-full rounded-2xl object-cover;
+      grid-row-start: 1;
+      grid-row-end: 2;
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+
+    .favorite-icon {
+      @apply z-10 p-4;
+      grid-row-start: 1;
+      grid-row-end: 2;
+      grid-column-start: 2;
+      grid-column-end: 3;
+      align-self: flex-start;
+      justify-self: flex-end;
+    }
+    .title {
+      @apply mb-3 mt-8 text-s1;
+      grid-row-start: 2;
+      grid-row-end: 3;
+      grid-column-start: 1;
+      grid-column-end: 2;
+    }
+    .arrow-icon {
+      @apply z-10 mt-8;
+      grid-row-start: 2;
+      grid-row-end: 3;
+      grid-column-start: 2;
+      grid-column-end: 3;
+      align-self: flex-start;
+      justify-self: flex-end;
+    }
+    .description {
+      @apply mb-3 line-clamp-2 text-b4 text-grey-500;
+      grid-row-start: 3;
+      grid-row-end: 4;
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+    .price {
+      @apply mb-6 text-b3 text-grey-950;
+      grid-row-start: 4;
+      grid-row-end: 5;
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+    .location-icon {
+      @apply z-10 text-primary-950;
+      grid-row-start: 5;
+      grid-row-end: 6;
+      grid-column-start: 1;
+      grid-column-end: 2;
+      align-self: center;
+    }
+    .location {
+      @apply ml-10 text-b4 text-grey-800;
+      grid-row-start: 5;
+      grid-row-end: 6;
+      grid-column-start: 1;
+      grid-column-end: 3;
+      align-self: center;
+    }
+  }
 }
