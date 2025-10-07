@@ -109,10 +109,20 @@ module.exports = {
         '50%': { transform: 'translateY(-100%)' },
         '100%': { transform: 'translateY(200%)' },
       },
+      arrowFlowLeft: {
+        '0%': { transform: 'translateX(-100%)' },
+        '100%': { transform: 'translateX(0)' },
+      },
+      arrowFlowRight: {
+        '0%': { transform: 'translateX(100%)' },
+        '100%': { transform: 'translateX(0)' },
+      },
     },
     animation: {
       slide1: 'slide1 17s linear infinite',
       slide2: 'slide2 17s linear infinite',
+      'arrow-left': 'arrowFlowLeft 6s linear infinite',
+      'arrow-right': 'arrowFlowRight 6s linear infinite',
     },
   },
   plugins: [],

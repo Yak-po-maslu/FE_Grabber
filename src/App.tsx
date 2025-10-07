@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { useEffect } from 'react'
 import userProfileStore, { initialState } from './store/userProfileStore'
 import useFetchUserProfile from './api/useFetchUserProfile'
+import { CustomToaster } from './components'
 
 export default function App() {
   const routers = createBrowserRouter(routes)
@@ -36,5 +37,10 @@ export default function App() {
     }
   }, [status, userData, error, userProfileInStore])
 
-  return <RouterProvider router={routers} />
+  return (
+    <>
+      <RouterProvider router={routers} />
+      <CustomToaster />
+    </>
+  )
 }

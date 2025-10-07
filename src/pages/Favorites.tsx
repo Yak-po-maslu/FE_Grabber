@@ -21,8 +21,7 @@ const Favorites = () => {
         <h1 className="pb-[64px] text-center font-kyiv text-h21">
           Тут з’являться оголошення, <br /> які ви вподобали
         </h1>
-        <HeartsIcon />
-        <p className="mt-8 font-kyiv text-h21"> ...</p>
+        <HeartsIcon className="mb-[298px]" />
       </section>
     )
   }
