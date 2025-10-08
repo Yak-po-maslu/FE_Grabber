@@ -64,7 +64,7 @@ const AdInfo = ({ ad_id }: Props) => {
             <Counter count={count} setCount={setCount} />
             <Button
               text="Додати в кошик"
-              className="button h-[40px] min-w-btn-medium py-0"
+              className="h-[40px] min-w-btn-medium py-0"
               onClick={handleAddToCart}
             />
           </div>

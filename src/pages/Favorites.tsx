@@ -27,7 +27,7 @@ const Favorites = () => {
   }
 
   return (
-    <section className="m-auto mb-[160px] mt-[220px] flex max-w-container flex-col items-center">
+    <section className="m-auto mb-[160px] mt-[72px] flex max-w-container flex-col items-center">
       <div className="mb-[80px] flex items-center gap-2">
         <HeartsIconLeft />
         <h2 className="text-h31">Оголошення, які вам сподобалися</h2>
