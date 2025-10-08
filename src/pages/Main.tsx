@@ -9,8 +9,7 @@ const Main = () => {
       <AnimationSection />
       <SliderSection />
       <PopularSection />
-      <h2 className="ml-[155px] text-h31">Вам може сподобатися</h2>
-      <RecommendedSection className="max-w-[1248px]" slideView={2} variant="home" />
+      <RecommendedSection slideView={2} text="Вам може сподобатися" variant="home" />
       <BuySellSection />
       <div className="my-[96px] text-center">
         <p className="mb-6 text-h31">Є питання? У нас є відповіді!</p>
