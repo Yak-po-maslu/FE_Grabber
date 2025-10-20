@@ -29,6 +29,7 @@
     }
 
     /* Приховати нативну іконку ока в Edge */
+
     &::-ms-reveal {
       display: none;
     }
@@ -43,10 +44,12 @@
     }
 
     /* Приховати нативну іконку ока в Edge */
+
     &::-ms-reveal {
       display: none;
     }
   }
+
   /* Стилі для всіх карток */
   .card-recommended {
     @apply border border-transparent bg-primary-50 transition duration-300 hover:bg-secondary-brown-100;

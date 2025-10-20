@@ -19,7 +19,7 @@ const AdInfo = ({ ad_id }: Props) => {
     addToCart({
       id: String(data.id),
       title: data.title,
-      price: data.price,
+      image: data.images?.[0],
       quantity: count,
     })
     setCount(1)
@@ -65,7 +65,10 @@ const AdInfo = ({ ad_id }: Props) => {
             <Button
               text="Додати в кошик"
               className="h-[40px] min-w-btn-medium py-0"
-              onClick={handleAddToCart}
+              onClick={(e) => {
+                handleAddToCart()
+                ;(e.currentTarget as HTMLButtonElement).blur()
+              }}
             />
           </div>
         </div>
