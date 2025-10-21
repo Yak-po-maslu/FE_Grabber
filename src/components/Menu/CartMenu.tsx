@@ -14,9 +14,19 @@ const CartMenu = () => {
       }
     }
 
-    document.addEventListener('click', handleClick)
+    const handleEsc = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsOpen(false)
+      }
+    }
 
-    return () => document.removeEventListener('click', handleClick)
+    document.addEventListener('click', handleClick)
+    document.addEventListener('keydown', handleEsc)
+
+    return () => {
+      document.removeEventListener('click', handleClick)
+      document.removeEventListener('keydown', handleEsc)
+    }
   }, [])
 
   const totalCount = items.reduce((sum, item) => sum + item.quantity, 0)
