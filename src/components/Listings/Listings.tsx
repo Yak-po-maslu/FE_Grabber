@@ -4,6 +4,9 @@ import { TListingGet } from '../../types/listingsTypes'
 
 interface ListingsProps {
   listings: TListingGet[]
+  currentPage: number
+  totalPages: number
+  onPageChange: (page: number) => void
 }
 
 const Listings: React.FC<ListingsProps> = ({ listings }) => {

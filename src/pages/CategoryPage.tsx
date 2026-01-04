@@ -13,20 +13,26 @@ import {
 import useFetchCategories from '../api/useFetchCategories'
 import Listings from '../components/Listings/Listings'
 import useFetchListings from '../api/useFetchListings'
+import { useListingsStore } from '../store/listingsStore'
+import { useSyncQueryParamsWithUrl } from '../hooks/useSyncQueryParamsWithUrl'
 
 interface CategoryPageProps {}
 
 const CategoryPage: React.FC<CategoryPageProps> = ({}) => {
+  useSyncQueryParamsWithUrl()
+
+  const { queryParams } = useListingsStore()
+
+  const { data: listings, isSuccess } = useFetchListings(queryParams)
+
+  const { data: categories } = useFetchCategories()
+
   const rawCategory = useParams().category
 
   const categoryPage = decodeURIComponent(rawCategory ?? '')
 
-  const { data: categories } = useFetchCategories()
-
   const categoryId =
     categoryPage && categories && categories.find((cat) => cat.name === categoryPage)?.id
-
-  const { data: listings, isSuccess } = useFetchListings()
 
   return (
     <div className="mx-auto flex max-w-container flex-col justify-center gap-16 pb-24 pt-8 align-middle">
@@ -74,8 +80,15 @@ const CategoryPage: React.FC<CategoryPageProps> = ({}) => {
       <section>
         {isSuccess && (
           <>
-            <p className="text-h41 mb-16 text-grey-950">Знайдено {listings.length} оголошень</p>
-            {<Listings listings={listings} />}
+            <p className="mb-16 text-h41 text-grey-950">Знайдено {listings.length} оголошень</p>
+            {
+              <Listings
+                listings={listings}
+                currentPage={queryParams}
+                onPageChange={}
+                totalPages={}
+              />
+            }
           </>
         )}
       </section>

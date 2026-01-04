@@ -4,7 +4,11 @@ import { ApiError } from '../types/types'
 
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH'
 
-export type TQueryParams = Record<string, string | number | boolean>
+export type TQueryParams = {
+  page?: number
+  limit?: number
+  filters?: Record<string, string | number>
+}
 
 type Params<Data> = {
   path: string
