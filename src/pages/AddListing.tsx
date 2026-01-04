@@ -215,7 +215,7 @@ const AddListing = () => {
                       <input
                         type="radio"
                         {...register('subcategory_name')}
-                        value={JSON.stringify(subcategory)}
+                        value={subcategory.name}
                         id={subcategory.name}
                         className="appearance-none"
                       />
