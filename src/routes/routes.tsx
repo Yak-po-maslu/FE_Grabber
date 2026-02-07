@@ -1,6 +1,6 @@
 import { PageWrapper, PrivateRoute } from '../hoc'
 import {
-  AddProduct,
+  AddListing,
   Admin,
   Cart,
   ForgotPassword,
@@ -49,7 +49,7 @@ export const routes = [
         path: PATHS.PRODUCTS.add,
         element: (
           <PrivateRoute>
-            <AddProduct />
+            <AddListing />
           </PrivateRoute>
         ),
       },

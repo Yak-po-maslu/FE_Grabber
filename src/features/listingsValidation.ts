@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const addAdsSchema = z.object({
+export const addListingSchema = z.object({
   title: z
     .string()
     .trim()
@@ -14,6 +14,7 @@ export const addAdsSchema = z.object({
     .max(1000, 'Опис має містити не більше 1000 символів')
     .min(40, 'Опис має містити не менше 40 символів'),
   category_name: z.string().nonempty('Категорія є обовʼязковою'),
+  subcategory_name: z.string().nonempty('Підкатегорія є обовʼязковою'),
   images: z
     .array(
       z
@@ -31,6 +32,7 @@ export const addAdsSchema = z.object({
     .max(4, 'Максимум 4 зображення'),
   price: z
     .string()
+    .regex(/^\d+$/, 'Введіть цифру без крапок, ком, відступів та будь-яких інших символів')
     .trim()
     .nonempty('Ціна є обовʼязковою')
     .refine((val) => !isNaN(Number(val)) && Number(val) >= 1, 'Ціна має бути числом більше за 0'),

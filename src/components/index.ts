@@ -28,7 +28,7 @@ export { default as ConfirmModal } from './ConfirmModal/ConfirmModal'
 
 export { default as CustomToaster } from './CustomToaster/CustomToaster'
 
-export { default as AdsImageUploader } from './AdsImageUploader/AdsImageUploader'
+export { default as ListingImageUploader } from './ListingImageUploader/ListingImageUploader.tsx'
 
 export { default as Input } from './Input/Input'
 

@@ -1,20 +1,22 @@
 import { useForm } from 'react-hook-form'
-import { addAdsSchema } from '../features/adsValidation'
+import { addListingSchema } from '../features/listingsValidation'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { AdsImageUploader, Button } from '../components'
+import { ListingImageUploader, Button } from '../components'
 import { z } from 'zod'
 import toast, { Toaster } from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import useFetchCategories from '../api/useFetchCategories'
 import { capitalizeFirstLetter } from '../utils/capitalizeFirstLetter'
 import useAdsCreate from '../api/adsCreate'
+import useFetchSubcategories from '../api/useFetchSubcategories'
 
-export type TFormData = z.infer<typeof addAdsSchema>
+export type TFormData = z.infer<typeof addListingSchema>
 
 const defaultValues: TFormData = {
   title: '',
   description: '',
   category_name: '',
+  subcategory_name: '',
   images: [],
   price: '0',
   contact_name: '',
@@ -23,7 +25,7 @@ const defaultValues: TFormData = {
   location: '',
 }
 
-const AddProduct = () => {
+const AddListing = () => {
   const {
     register,
     handleSubmit,
@@ -34,12 +36,13 @@ const AddProduct = () => {
     formState: { errors },
   } = useForm<TFormData>({
     defaultValues,
-    resolver: zodResolver(addAdsSchema),
+    resolver: zodResolver(addListingSchema),
     mode: 'onChange',
   })
 
   const { mutateAsync: createAds, isPending } = useAdsCreate()
   const { data: categories } = useFetchCategories()
+  const { data: subcategories } = useFetchSubcategories()
   const navigate = useNavigate()
 
   const handleSubmitForm = async (data: TFormData) => {
@@ -50,6 +53,7 @@ const AddProduct = () => {
     newAds.append('price', data.price)
     newAds.append('status', 'draft')
     newAds.append('category', data.category_name)
+    newAds.append('subcategory', data.subcategory_name)
     newAds.append('contact_name', capitalizeFirstLetter(data.contact_name))
     newAds.append('email', data.email)
     newAds.append('phone', data.phone)
@@ -76,6 +80,7 @@ const AddProduct = () => {
   }
 
   const watchCategory = watch('category_name')
+  const watchSubcategory = watch('subcategory_name')
   const watchTitle = watch('title')
   const watchDescription = watch('description')
   const watchLocation = watch('location')
@@ -88,6 +93,7 @@ const AddProduct = () => {
   const isFormValid = Boolean(
     watchImages.length > 0 &&
       watchCategory &&
+      watchSubcategory &&
       watchTitle &&
       watchDescription &&
       watchLocation &&
@@ -96,6 +102,12 @@ const AddProduct = () => {
       watchEmail &&
       watchPhone &&
       !Object.keys(errors).length,
+  )
+
+  const selectedCategory = categories?.find((category) => category.name === watchCategory)
+
+  const filteredSubcategories = subcategories?.filter(
+    (subcategory) => subcategory.category === selectedCategory?.id,
   )
 
   return (
@@ -182,6 +194,44 @@ const AddProduct = () => {
           {errors.category_name && <p className="error-text">{errors.category_name.message}</p>}
         </section>
 
+        {/* Секція для вибору підкатегорії */}
+        {watchCategory && (
+          <section>
+            <h2 className="title-add-product-section">Підкатегорія *</h2>
+
+            <div className="flex flex-wrap gap-5">
+              {filteredSubcategories && filteredSubcategories.length > 0 ? (
+                filteredSubcategories.map((subcategory, index) => {
+                  return (
+                    <label
+                      className={`text-regular transition-[background-color, color] cursor-pointer rounded-full border border-primary-950 px-4 py-2 text-b4 duration-300 ${
+                        watchSubcategory === subcategory.name
+                          ? 'bg-primary-950 text-primary-50'
+                          : 'text-primary-950 hover:bg-primary-950 hover:text-primary-50'
+                      }`}
+                      key={index + subcategory.name}
+                    >
+                      {subcategory.name}
+                      <input
+                        type="radio"
+                        {...register('subcategory_name')}
+                        value={subcategory.name}
+                        id={subcategory.name}
+                        className="appearance-none"
+                      />
+                    </label>
+                  )
+                })
+              ) : (
+                <p>Підкатегорії відсутні</p>
+              )}
+            </div>
+            {errors.subcategory_name && (
+              <p className="error-text">{errors.subcategory_name.message}</p>
+            )}
+          </section>
+        )}
+
         {/* Секція для місця створення товару */}
         <section>
           <h2 className="title-add-product-section">
@@ -216,7 +266,7 @@ const AddProduct = () => {
           <p className="description-add-product-section">
             Перетягніть файли або натисніть для завантаження
           </p>
-          <AdsImageUploader setValue={setValue} watch={watch} setError={setError} />
+          <ListingImageUploader setValue={setValue} watch={watch} setError={setError} />
           {errors.images && <p className="error-text">{errors.images.message}</p>}
         </section>
 
@@ -319,4 +369,4 @@ const AddProduct = () => {
   )
 }
 
-export default AddProduct
+export default AddListing
